@@ -8,10 +8,7 @@ export function Voltar({ para }: { para: string }){
             <nav className="flex justify-start text-lg mx-5 my-3">
             <Link to={`/${para}`}>
                     <div className="flex items-center gap-1">
-                        <MoveLeft/>
-                        <h2>
-                            Voltar
-                        </h2>
+                        <MoveLeft className="w-7 h-auto"/>
                     </div>
                 </Link>
             </nav>

@@ -6,15 +6,45 @@ import { Voltar } from "@/components/Voltar";
 import { Label } from "@/components/ui/label";
 import { Input, InputSenha } from "@/components/ui/input";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { Spinner } from "@/components/ui/spinner";
+import { Toast } from "@/components/ui/toast";
+import { Toaster } from "@/components/ui/toaster"
+import { toast } from "@/hooks/use-toast"
+import { Login } from "@/assets/types/types";
 
 export default function Entrar() {
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
+    const [carregando, setCarregando] = useState<boolean>(false);
+    const [mensagem, setMensagem] = useState();
+    const navigate = useNavigate();
 
     const handleSubmit = async () => {
+        try {
+            setCarregando(true);
+            const response = await autentica({ email, senha } as Login);
 
+            if (response.success) {
+                localStorage.setItem("authToken", response.data);
+                navigate("/central-de-personagens");
+            } else {
+                if (response.error = "") {
+                    
+                } else {
+                    throw new Error("");
+                }
+            }
+        } catch (error: any) {
+            toast({
+                variant: 'destructive',
+                title: "Ah não! Algo deu errado.",
+                description: "Houve um problema com sua solicitação. Tente novamente mais tarde!",
+            });    
+            console.log(error);
+        } finally {
+            setCarregando(false);
+        }
     }
 
     return (
@@ -33,10 +63,10 @@ export default function Entrar() {
                     <div className="grid place-items-center items-center gap-4">
                         <div className="text-center text-gray-900">
                             <h1 className="font-semibold xxs:text-[10vw] leading-[1.2]">
-                                Bem-Vindo!
+                                Seja Bem-Vindo!
                             </h1>
                             <p className="text-lg">
-                                Conecte-se para utilizar nossa ferramenta
+                                Conecte-se para utilizar nossa ferramenta.
                             </p>
                         </div>
                         <div className="w-full grid gap-2">
@@ -67,7 +97,7 @@ export default function Entrar() {
                             <p>
                                 Esqueceu a senha?
                             </p>
-                            <Link to="mudarSenha">
+                            <Link to="/mudar-senha">
                                 <strong>
                                     Clique aqui!
                                 </strong>
@@ -78,7 +108,11 @@ export default function Entrar() {
                                 className="w-full"
                                 onClick={handleSubmit}
                             >
-                                Entrar
+                                {
+                                    carregando ?
+                                    <Spinner />
+                                    : "Entrar"
+                                }
                             </Button>
                         </div>
                         <div className="flex gap-2">
@@ -89,6 +123,7 @@ export default function Entrar() {
                                 Cadastre-se!
                             </Link>
                         </div>
+                        <Toaster />
                     </div>
                 </div>
             </PaginaMeioUmaColuna>

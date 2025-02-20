@@ -46,7 +46,7 @@ export default function Inicio() {
                                             Sobre Rick and Morty
                                         </DialogTitle>
                                         <DialogDescription asChild>
-                                            <div>
+                                            <div className="grid gap-3">
                                                 <p>
                                                     É uma das séries animadas mais populares do momento. Ela junta ficção científica, humor ácido e críticas socias. Esta obra foi feita por Justin Roiland e Dan Harmon e a animação foi lançada em 2013 no Adult Swim e sem muita demora conquistou fãs ao redor do mundo todo. 
                                                 </p>

@@ -39,7 +39,7 @@ const InputSenha = React.forwardRef<HTMLInputElement, InputProps>(({ className, 
   const [show, setShow] = React.useState<boolean>(false);
 
   return (
-    <div className="flex w-full">
+    <div className="flex w-full select-none">
       <InputIntegrado
         type={show ? "text" : "password"}
         ref={ref} 

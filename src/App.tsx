@@ -13,8 +13,8 @@ function App() {
         <Route path="/inicio" element={<Inicio/>}/>
         <Route path="/entrar" element={<Entrar />}/>
         <Route path="/cadastrar" />
-        <Route path="/mudarSenha" />
-        <Route path="/overview" />
+        <Route path="/mudar-senha" />
+        <Route path="/central-de-personagens" />
       </Routes>
     </Router>
 )
