@@ -67,3 +67,8 @@
   }
 }
 
+@layer utilities {
+  .text-p-responsive {
+    @apply text-sm xxs:text-base xs:text-sm sm:text-base lg:text-lg xl:text-[1.2vw];
+  }
+}

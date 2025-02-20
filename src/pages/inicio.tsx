@@ -12,7 +12,7 @@ export default function Inicio() {
         <PaginaCorpo>
             <PaginaTopo>
                 <header className="w-full top-0 font-semibold text-gray-900 ">
-                    <nav className="flex justify-end xxs:text-lg xl:text-[0.8vw] mx-5 my-3">
+                    <nav className="flex justify-end xxs:text-lg xl:text-xl mx-5 my-3">
                         <Link to="/entrar">
                             Entrar
                         </Link>
@@ -26,7 +26,7 @@ export default function Inicio() {
                             <h1 className="font-semibold text-[8.9vw] xxs:text-[10vw] xs:text-[7.3vw] lg:text-[4.5vw] leading-[1.2]">
                                 Explore o universo de Rick and Morty!
                             </h1>
-                            <p className="xxs:text-lg xs:text-xl sm:text-[2.7vw] lg:text-xl xl:text-[1.8vw] xl:leading-[1.2] mt-3 ">
+                            <p className="xxs:text-lg xs:text-xl sm:text-[2.7vw] lg:text-xl xl:text-[1.8vw] xl:leading-[1.2] mt-3">
                                 Uma experiência interativa para explorar personagens através de uma API.
                             </p>
                         </div>
@@ -35,7 +35,7 @@ export default function Inicio() {
                                 <DialogTrigger asChild>
                                     <Button 
                                         size={"xl"} 
-                                        className="xxsS:text-lg text-lg sm:text-xl xl:text-[0.8vw] sm:h-12 lg:h-10 sm:px-16 sm:px-12 xl:h-[2vw] xl:px-[2.3vw] shadow-xl"
+                                        className="xxsS:text-lg text-lg sm:text-xl xl:text-xl sm:h-12 lg:h-10 sm:px-16 sm:px-12 xl:h-12 xl:px-18 shadow-xl"
                                     >
                                         Sobre a animação
                                     </Button>

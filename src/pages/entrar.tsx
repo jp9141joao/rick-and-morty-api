@@ -17,7 +17,7 @@ export default function Entrar() {
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
     const [carregando, setCarregando] = useState<boolean>(false);
-    const [mensagem, setMensagem] = useState();
+    const [avisoInput, setAvisoInput] = useState<string>("");
     const navigate = useNavigate();
 
     const handleSubmit = async () => {
@@ -30,6 +30,7 @@ export default function Entrar() {
                 navigate("/central-de-personagens");
             } else {
                 if (response.error = "") {
+                    setAvisoInput("Email");
                     
                 } else {
                     throw new Error("");
@@ -53,19 +54,19 @@ export default function Entrar() {
                 <Voltar para="inicio"/>
             </PaginaTopo>
             <PaginaMeioUmaColuna>
-                <div className="grid gap-8 mx-[6.8vw]">
+                <div className="grid place-items-center items-start gap-5 xxs:gap-8 xs:gap-5 mx-[6.8vw] mb-[4vw]">
                     <div>
                         <img 
                             src={Image}
-                            className="px-[8vw]"
+                            className="px-[13vw] xxs:px-[8vw] xs:px-[20vw]"
                         />
                     </div>
-                    <div className="grid place-items-center items-center gap-4">
+                    <div className="grid place-items-center items-center gap-2 xxs:gap-4 xs:gap-2">
                         <div className="text-center text-gray-900">
-                            <h1 className="font-semibold xxs:text-[10vw] leading-[1.2]">
+                            <h1 className="font-semibold text-[8.9vw] xxs:text-[10vw] xs:text-[7.3vw] lg:text-[4.5vw] leading-[1.2]">
                                 Seja Bem-Vindo!
                             </h1>
-                            <p className="text-lg">
+                            <p className="xxs:text-lg xs:text-xl sm:text-[2.7vw] lg:text-xl xl:text-[1.8vw] xl:leading-[1.2] mt-1">
                                 Conecte-se para utilizar nossa ferramenta.
                             </p>
                         </div>
@@ -93,7 +94,7 @@ export default function Entrar() {
                                 />
                             </div>
                         </div>
-                        <div className="flex w-full gap-2 text-start">
+                        <div className="flex w-full gap-2 text-p-responsive text-start">
                             <p>
                                 Esqueceu a senha?
                             </p>
@@ -115,7 +116,7 @@ export default function Entrar() {
                                 }
                             </Button>
                         </div>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 text-p-responsive">
                             <p>
                                 Nao tem uma conta?
                             </p>
