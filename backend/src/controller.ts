@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from "@prisma/client";
 import { HttpResult } from "./models/http-result";
-import { Login } from './request';
+import { CriarConta, Login } from './request';
 import { Utils } from './utils/utils';
 import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
@@ -59,8 +59,24 @@ export const autentica = async (req: Request, res: Response): Promise<void> => {
         );
 
         res.status(200).json(HttpResult.Success(token));
-    } catch (error: any) {
-        res.status(400).json(HttpResult.Fail("Ocorreu um erro inesperado no Autentica"));
-        console.error(error);
+    } catch (erro: any) {
+        res.status(400).json(HttpResult.Fail("Ocorreu um erro inesperado no autentica"));
+        console.error(erro);
+    }
+}
+
+export const criarConta = async (req: Request, res: Response) => {
+    try {
+        const {
+            nome,
+            email,
+            senha
+        } = req.body as CriarConta;
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1];
+
+    } catch (erro: any) {
+        res.status(400).json(HttpResult.Fail("Ocorreu um erro inesperado no criarConta"));
+        return;
     }
 }

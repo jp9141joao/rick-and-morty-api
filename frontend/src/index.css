@@ -72,3 +72,14 @@
     @apply text-sm xxs:text-base xs:text-sm sm:text-base lg:text-sm xl:text-lg
   }
 }
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
