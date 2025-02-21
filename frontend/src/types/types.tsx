@@ -1,6 +1,12 @@
 export type Login = {
     email: string,
-    passwrod: string
+    senha: string
+}
+
+export type Usuario = {
+    nome: string,
+    email: string,
+    senha: string
 }
 
 export type MensagemToast = {

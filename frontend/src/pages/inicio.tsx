@@ -26,7 +26,7 @@ export default function Inicio() {
                             <h1 className="font-semibold text-[8.9vw] xxs:text-[10vw] xs:text-[7.3vw] lg:text-[4.5vw] leading-[1.2]">
                                 Explore o universo de Rick and Morty!
                             </h1>
-                            <p className="xxs:text-lg xs:text-xl sm:text-[2.7vw] lg:text-xl xl:text-[1.8vw] xl:leading-[1.2] mt-3">
+                            <p className="xxs:text-lg xs:text-xl sm:text-[2.7vw] lg:text-xl xl:text-[1.8vw] xl:leading-[1.2] mt-2">
                                 Uma experiência interativa para explorar personagens através de uma API.
                             </p>
                         </div>

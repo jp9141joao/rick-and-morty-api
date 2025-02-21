@@ -1,17 +1,17 @@
-import { PaginaCorpo, PaginaRodape, PaginaMeioUmaColuna, PaginaTopo } from "../components/PageLayout/LayoutPagina";
+import { PaginaCorpo, PaginaRodape, PaginaMeio, PaginaTopo } from "../components/PageLayout/LayoutPagina";
 import Image from '../assets/rick-and-morty-31042.png'
 import { Button } from "../components/ui/button";
 import { Creditos } from "@/components/Creditos";
 import { Voltar } from "@/components/Voltar";
 import { Label } from "@/components/ui/label";
 import { Input, InputSenha } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Spinner } from "@/components/ui/spinner";
-import { Toast } from "@/components/ui/toast";
 import { Toaster } from "@/components/ui/toaster"
 import { toast } from "@/hooks/use-toast"
-import { Login } from "@/assets/types/types";
+import { Login } from "@/types/types";
+import { autentica } from "@/service/service";
 
 export default function Entrar() {
     const [email, setEmail] = useState<string>('');
@@ -20,20 +20,42 @@ export default function Entrar() {
     const [avisoInput, setAvisoInput] = useState<string>("");
     const navigate = useNavigate();
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e: React.FormEvent) => {
         try {
+            e.preventDefault();
             setCarregando(true);
+
             const response = await autentica({ email, senha } as Login);
 
             if (response.success) {
                 localStorage.setItem("authToken", response.data);
                 navigate("/central-de-personagens");
             } else {
-                if (response.error = "") {
+                if (response.error = "Erro: E-mail Inválida!") {
                     setAvisoInput("Email");
-                    
+                    toast({
+                        variant: 'destructive',
+                        title: 'E-mail Inválido',
+                        description: 'O endereço de e-mail inserido é inválido. Verifique e tente novamente',
+                    });
+
+                } else if (response.error == "Erro: Senha Inválida!") {
+                    setAvisoInput("Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Senha Inválida',
+                        description: 'A senha inserida é inválida. Verifique e tente novamente.',
+                    });
+                }  else if (response.error == "Erro: E-mail ou Senha Inválidos") {
+                    setAvisoInput("Email-Senha")
+                    toast({
+                        variant: 'destructive', 
+                        title: 'E-mail ou senha Inválidos', 
+                        description: 'O e-mail ou a senha inseridos são inválidos. Por favor, tente novamente.', 
+                    });
+
                 } else {
-                    throw new Error("");
+                    throw new Error("A solicitação falhou. Verifique os dados e tente novamente.");
                 }
             }
         } catch (error: any) {
@@ -46,27 +68,41 @@ export default function Entrar() {
         } finally {
             setCarregando(false);
         }
-    }
+    };
+
+    useEffect(() => {
+        const token = localStorage.getItem('authToken');
+
+        if (!token) {
+            localStorage.removeItem('authToken');
+        }
+    }, []);
 
     return (
         <PaginaCorpo>
             <PaginaTopo>
                 <Voltar para="inicio"/>
             </PaginaTopo>
-            <PaginaMeioUmaColuna>
+            <PaginaMeio>
+                <div className="hidden lg:block">
+                    <img 
+                        src={Image}
+                        className="px-[4vw]"
+                    />
+                </div>
                 <div className="grid place-items-center items-start gap-5 xxs:gap-8 xs:gap-5 mx-[6.8vw] mb-[4vw]">
-                    <div>
+                    <div className="lg:hidden">
                         <img 
                             src={Image}
                             className="px-[13vw] xxs:px-[8vw] xs:px-[20vw]"
                         />
                     </div>
-                    <div className="grid place-items-center items-center gap-2 xxs:gap-4 xs:gap-2">
+                    <form onSubmit={handleSubmit} className="grid place-items-center items-center gap-2">
                         <div className="text-center text-gray-900">
-                            <h1 className="font-semibold text-[8.9vw] xxs:text-[10vw] xs:text-[7.3vw] lg:text-[4.5vw] leading-[1.2]">
-                                Seja Bem-Vindo!
+                            <h1 className="font-semibold text-[8.9vw] xxs:text-[10vw] xs:text-[7.3vw] lg:text-[4vw] xl:text-[3.4vw] leading-[1.2]">
+                                Seja bem-vindo!
                             </h1>
-                            <p className="xxs:text-lg xs:text-xl sm:text-[2.7vw] lg:text-xl xl:text-[1.8vw] xl:leading-[1.2] mt-1">
+                            <p className="xxs:text-lg xs:text-xl sm:text-[2.7vw] lg:text-base xl:text-[1.3vw] xl:leading-[1.2]">
                                 Conecte-se para utilizar nossa ferramenta.
                             </p>
                         </div>
@@ -80,6 +116,8 @@ export default function Entrar() {
                                     placeholder="nome@exemplo.com"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    className={["Email", "Email-Senha"].includes(avisoInput)  ? "border-red-500" : ""}
+                                    onClick={() => setAvisoInput("")}
                                 />
                             </div>
                             <div>
@@ -88,26 +126,17 @@ export default function Entrar() {
                                 </Label>
                                 <InputSenha
                                     id="senha"
-                                    placeholder="Abc1234#"
                                     value={senha}
                                     onChange={(e) => setSenha(e.target.value)}
+                                    className={["Senha", "Email-Senha"].includes(avisoInput) ? "border-red-500" : ""}
+                                    onClick={() => setAvisoInput("")}
                                 />
                             </div>
                         </div>
-                        <div className="flex w-full gap-2 text-p-responsive text-start">
-                            <p>
-                                Esqueceu a senha?
-                            </p>
-                            <Link to="/mudar-senha">
-                                <strong>
-                                    Clique aqui!
-                                </strong>
-                            </Link>
-                        </div>
-                        <div className="w-full">
+                        <div className="w-full mt-2">
                             <Button
+                                type="submit"
                                 className="w-full"
-                                onClick={handleSubmit}
                             >
                                 {
                                     carregando ?
@@ -116,18 +145,20 @@ export default function Entrar() {
                                 }
                             </Button>
                         </div>
-                        <div className="flex gap-2 text-p-responsive">
+                        <div className="flex gap-1 text-p-responsive">
                             <p>
                                 Nao tem uma conta?
                             </p>
-                            <Link to="/cadastrar" className="underline">
-                                Cadastre-se!
+                            <Link to="/cadastrar">
+                                <strong>
+                                    Cadastre-se!
+                                </strong>
                             </Link>
                         </div>
                         <Toaster />
-                    </div>
+                    </form>
                 </div>
-            </PaginaMeioUmaColuna>
+            </PaginaMeio>
             <PaginaRodape>
                 <Creditos />
             </PaginaRodape>
