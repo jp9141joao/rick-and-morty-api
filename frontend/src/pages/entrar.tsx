@@ -31,7 +31,7 @@ export default function Entrar() {
                 localStorage.setItem("authToken", response.data);
                 navigate("/central-de-personagens");
             } else {
-                if (response.error = "Erro: E-mail Inválida!") {
+                if (response.error = "Erro: E-mail Inválido!") {
                     setAvisoInput("Email");
                     toast({
                         variant: 'destructive',

@@ -14,7 +14,6 @@ function App() {
         <Route path="/inicio" element={ <Inicio/> } />
         <Route path="/entrar" element={ <Entrar /> } />
         <Route path="/cadastrar" element={ <Cadastrar /> } />
-        <Route path="/mudar-senha" />
         <Route path="/central-de-personagens" />
       </Routes>
     </Router>
