@@ -11,11 +11,11 @@ function App() {
     <Router>
       <Routes>
         <Route path='*' />
-        <Route path="/" element={ <Navigate to={'/central-de-personagens'} /> } />
+        <Route path="/" element={ <Navigate to={'/central'} /> } />
         <Route path="/inicio" element={ <Inicio/> } />
         <Route path="/entrar" element={ <Entrar /> } />
         <Route path="/cadastrar" element={ <Cadastrar /> } />
-        <Route path="/central-de-personagens" element={ <Central />} />
+        <Route path="/central" element={ <Central />} />
       </Routes>
     </Router>
 )

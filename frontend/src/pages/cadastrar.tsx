@@ -77,7 +77,7 @@ export default function Cadastrar() {
                         description: 'Por favor, forneça uma senha que atenda aos critérios mínimos, incluindo pelo menos uma letra maiúscula, um número e um caractere especial.',
                     });
 
-                } else if (response.error = "Erro: E-mail Muito Pequena!") {
+                } else if (response.error = "Erro: Senha Muito Pequena!") {
                     setAvisoInput("Senha");
                     toast({
                         variant: 'destructive',

@@ -1,6 +1,8 @@
-export const PaginaCorpo = ({ children }: { children: React.ReactNode }) => {
+import { cn } from "@/lib/utils";
+
+export const PaginaCorpo = ({ children, className }: { children: React.ReactNode, className?: string }) => {
     return (
-        <div className="flex min-h-screen flex-col">
+        <div className={cn("flex min-h-screen flex-col", className)}>
             { children }
         </div>
     );
@@ -14,6 +16,16 @@ export const PaginaTopo = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
+export const PaginaMeioUmaColuna = ({ children, className }: { children: React.ReactNode, className?: string }) => {
+    return (
+        <div className="grid flex-grow">
+            <div className={cn("grid grid-cols-1 place-items-center lg:mx-[5.5vw]", className)}>
+                { children }
+            </div>
+        </div>
+    );
+};
+
 export const PaginaMeio = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="grid flex-grow">
@@ -24,19 +36,9 @@ export const PaginaMeio = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
-export const PaginaMeioUmaColuna = ({ children }: { children: React.ReactNode }) => {
+export const PaginaRodape = ({ children, className }: { children: React.ReactNode, className?: string }) => {
     return (
-        <div className="grid flex-grow">
-            <div className='grid grid-cols-1 place-items-center lg:mx-[5.5vw]'>
-                { children }
-            </div>
-        </div>
-    );
-};
-
-export const PaginaRodape = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <div className="grid place-items-center">
+        <div className={cn(`grid place-items-center ${className}`)}>
             { children }
         </div>
     );
