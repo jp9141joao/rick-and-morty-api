@@ -91,7 +91,7 @@ export default function Central() {
                 title: "Ah não! Algo deu errado.",
                 description: "Houve um problema com sua solicitação. Tente novamente mais tarde!",
             });    
-            console.log(erro);
+            console.error(erro);
         } finally {
             setCarregando(false);
         }
@@ -151,7 +151,7 @@ export default function Central() {
                 title: "Ah não! Algo deu errado.",
                 description: "Houve um problema com sua solicitação. Tente novamente mais tarde!",
             });    
-            console.log(erro);
+            console.error(erro);
         } finally {
             setCarregando(false);
         }
@@ -167,7 +167,7 @@ export default function Central() {
                 title: "Ah não! Algo deu errado.",
                 description: "Houve um problema com sua solicitação. Tente novamente mais tarde!",
             });    
-            console.log(erro);
+            console.error(erro);
         }
     };
 
@@ -187,7 +187,7 @@ export default function Central() {
                 title: "Ah não! Algo deu errado.",
                 description: "Houve um problema com sua solicitação. Tente novamente mais tarde!",
             });    
-            console.log(erro);
+            console.error(erro);
         }
     };
 
@@ -218,7 +218,7 @@ export default function Central() {
                         imagem: personagem.image
                     }
                 });
-                console.log(JSON.stringify(dadosPersonagens, null, 2))
+
                 setNavegacao({
                     voltar: response.info.prev,
                     proximo: response.info.next
@@ -234,7 +234,7 @@ export default function Central() {
                 title: "Ah não! Algo deu errado.",
                 description: "Houve um problema com sua solicitação. Tente novamente mais tarde!",
             });    
-            console.log(erro);
+            console.error(erro);
         }
     };
 
@@ -372,7 +372,7 @@ export default function Central() {
                                         conteudo != "Menu" && conteudo != "" ?
                                         <div className="grid gap-2 w-full mt-3">
                                             <Button
-                                                className="w-full"
+                                                className="w-full bg-gradient-to-tr from-[#1a9f9a] to-[#b6c937] text-primary-foreground shadow-lg transition-all duration-300 hover:bg-gradient-to-bl hover:from-[#b6c937] hover:to-[#1a9f9a]"
                                                 type="button"
                                                 disabled={desabilitarBtn}
                                                 onClick={
@@ -418,7 +418,7 @@ export default function Central() {
                         />
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="outline" className="h-10 ml-auto">
+                                <Button className="h-10 ml-auto">
                                     <p>
                                         { itemSelecionado }
                                     </p>
@@ -460,7 +460,7 @@ export default function Central() {
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>
-                    <div className="grid place-items-center items-start xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
+                    <div className="grid place-items-center items-start xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 mt-6">
                     {
                         (() => {
                             const data = personagens.map((personagem: Personagem) => {
@@ -470,49 +470,48 @@ export default function Central() {
                                 filtro.por === "Filtro" ||
                                 (filtro.por !== "Filtro" &&
                                 personagem[key].toLowerCase().includes(filtro.valor.toLowerCase())) ? (
-                                    <Card key={personagem.id} className="">
-                                    <CardHeader>
-                                    <CardTitle>{personagem.nome}
-
-                                    </CardTitle>
-                                    <CardDescription>
-                                        <p className="xs:grid text-sm font-medium leading-none">
-                                        Última Localização:
-                                        <span className="ml-1 break-words underline">
-                                            {personagem.localizacao !== "Unkown"
-                                            ? personagem.localizacao
-                                            : "Desconhecida"}
-                                        </span>
-                                        </p>
-                                    </CardDescription>
-                                    </CardHeader>
-                                    <CardContent className="relative">
-                                    <div>
-                                        <img className="rounded-lg" src={personagem.imagem} alt={personagem.nome} />
-                                    </div>
-                                    <div
-                                        className={`${
-                                        ["Vivo", "Viva"].includes(personagem.estatus)
-                                            ? "bg-green-600"
-                                            : ["Morto", "Morta"].includes(personagem.estatus)
-                                            ? "bg-red-500"
-                                            : "bg-[#707070]"
-                                        } font-semibold px-5 py-0.5 rounded-r-lg absolute top-0 mt-4 text-white`}
-                                    >
-                                        <p className="text-center">{personagem.estatus}</p>
-                                    </div>
-                                    </CardContent>
-                                </Card>
+                                    <Card key={personagem.id} className="hover:-mt-3 hover:mb-3 transition-all">
+                                        <CardHeader>
+                                            <CardTitle>
+                                                {personagem.nome}
+                                            </CardTitle>
+                                            <CardDescription>
+                                                <p className="xs:grid text-sm font-medium leading-none">
+                                                    Última Localização:
+                                                <span className="ml-1 break-words underline">
+                                                    {
+                                                        personagem.localizacao !== "Unkown" ? personagem.localizacao : "Desconhecida"
+                                                    }
+                                                </span>
+                                                </p>
+                                            </CardDescription>
+                                        </CardHeader>
+                                        <CardContent className="relative">
+                                            <div>
+                                                <img className="rounded-lg" src={personagem.imagem} />
+                                            </div>
+                                            <div
+                                                className={`${
+                                                    ["Vivo", "Viva"].includes(personagem.estatus) ? "bg-green-600" : 
+                                                    ["Morto", "Morta"].includes(personagem.estatus) ? "bg-red-500" : 
+                                                    "bg-[#707070]"
+                                                } font-semibold px-5 py-0.5 rounded-r-lg absolute top-0 mt-4 text-white`}
+                                            >
+                                                <p className="text-center">
+                                                    { personagem.estatus }
+                                                </p>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
                                 ) : null
                             );
-                    });
+                        });
 
-    // Filtra os itens nulos
-    const validData = data.filter((item) => item !== null);
+                            const validData = data.filter((item) => item !== null);
 
-    return validData.length > 0 ? validData : <p>Nenhum personagem foi retornado!</p>;
-  })()
-}
+                            return validData.length > 0 ? validData : <p className="text-center">Nenhum personagem foi retornado nessa pagina!</p>;
+                        })()
+                    }
 
                     </div>
                 </div>
@@ -537,6 +536,9 @@ export default function Central() {
                             }}
                         >
                             <PaginationPrevious />
+                        </PaginationItem>
+                        <PaginationItem className="text-sm font-semibold text-gray-900">
+                            Pagina { numeroPagina } 
                         </PaginationItem>
                         <PaginationItem
                             className={navegacao.proximo == null ? "opacity-50" : ""}

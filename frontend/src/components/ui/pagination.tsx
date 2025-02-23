@@ -85,7 +85,7 @@ const PaginationNext = ({
     className={cn("gap-1 pr-0", className)}
     {...props}
   >
-    <span>Proximo</span>
+    <span>Avançar</span>
     <ChevronRight className="h-4 w-4" />
   </PaginationLink>
 )

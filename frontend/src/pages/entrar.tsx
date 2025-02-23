@@ -64,7 +64,7 @@ export default function Entrar() {
                 title: "Ah não! Algo deu errado.",
                 description: "Houve um problema com sua solicitação. Tente novamente mais tarde!",
             });    
-            console.log(error);
+            console.error(error);
         } finally {
             setCarregando(false);
         }
@@ -100,7 +100,7 @@ export default function Entrar() {
                     <form onSubmit={handleSubmit} className="grid place-items-center items-center gap-2">
                         <div className="text-center text-gray-900">
                             <h1 className="font-semibold text-[8.9vw] xxs:text-[10.4vw] xs:text-[7.3vw] lg:text-[4vw] xl:text-[3.4vw] leading-[1.2]">
-                                Seja bem-vindo ao nosso site!
+                                Seja bem-vindo!
                             </h1>
                             <p className="xxs:text-lg xs:text-xl sm:text-[2.7vw] lg:text-base xl:text-[1.3vw] xl:leading-[1.2]">
                                 Conecte-se para utilizar nossa ferramenta.

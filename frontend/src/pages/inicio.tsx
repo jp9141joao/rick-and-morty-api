@@ -32,13 +32,15 @@ export default function Inicio() {
                         </div>
                         <div className="lg:w-full">
                             <Dialog>
-                                <DialogTrigger asChild>
+                                <DialogTrigger className="hover:-mt-1 hover:mb-1 transition-all" asChild>
+                                    <div>
                                     <Button 
                                         size={"xl"} 
-                                        className="xxsS:text-lg text-lg sm:text-xl xl:text-xl sm:h-12 lg:h-10 sm:px-16 sm:px-12 xl:h-12 xl:px-18 shadow-xl"
+                                        className="xxsS:text-lg text-lg sm:text-xl xl:text-xl sm:h-12 lg:h-10 sm:px-16 sm:px-12 xl:h-12 xl:px-18 shadow-xl "
                                     >
                                         Sobre a animação
                                     </Button>
+                                    </div>
                                 </DialogTrigger>
                                 <DialogContent>
                                     <DialogHeader>

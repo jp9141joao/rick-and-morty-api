@@ -95,7 +95,7 @@ export default function Cadastrar() {
                 title: "Ah não! Algo deu errado.",
                 description: "Houve um problema com sua solicitação. Tente novamente mais tarde!",
             });    
-            console.log(error);
+            console.error(error);
         } finally {
             setCarregando(false);
         }

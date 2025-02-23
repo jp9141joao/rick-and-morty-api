@@ -80,3 +80,19 @@ export const criarConta = async (req: Request, res: Response) => {
         return;
     }
 }
+
+export const alterarInfo = async (req: Request, res: Response) => {
+    try {
+        const {
+            nome,
+            email,
+            senha
+        } = req.body as CriarConta;
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1];
+
+    } catch (erro: any) {
+        res.status(400).json(HttpResult.Fail("Ocorreu um erro inesperado no criarConta"));
+        return;
+    }
+}
