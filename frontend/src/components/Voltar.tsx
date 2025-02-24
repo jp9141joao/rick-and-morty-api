@@ -1,16 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; // Importa o componente <Link>, utilizado para a navegação do usuario sem carregar a pagina inteira.
 
-export function Voltar({ para }: { para: string }){
+// Define o componente <Voltar> utilizado para voltar para uma rota, ele possui a propriedade "para" do tipo string
+// que é utilizada para configurar para onde a pagina irá redirecionar o usuario.
+export function Voltar({ para }: { para: string }) {
     
     return (
-        <header className="w-full top-0 font-semibold text-gray-900 ">
-            <nav className="flex justify-start mx-5 my-3">
+        // O componente <nav> é usado para envolver links de navegação.
+        <nav className="flex justify-start mx-5 my-3">
+            {/* 
+                O componente <Link> será responsavel por redirecionar o usuario, já 
+                a propriedade 'to' define a rota que para onde será enviado o usuario que recebe o valor de "para"
+            */}
             <Link to={`/${para}`}>
-                    <p className="text-p-responsive">
-                        Voltar
-                    </p>
-                </Link>
-            </nav>
-        </header>
+                {/* text-p-responsive: classe criada no arquivo tailwind.config.js para facilitar a responsividade da tag <p>. */}
+                <p className="text-p-responsive">
+                    Voltar
+                </p>
+            </Link>
+        </nav>
     )
-} 
+}

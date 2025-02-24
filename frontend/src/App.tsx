@@ -18,9 +18,7 @@ function App() {
         <Route path="/entrar" element={ <Entrar /> } />
         <Route path="/cadastrar" element={ <Cadastrar /> } />
         <Route path="/central" element={ 
-          <RotaProtegida>
             <Central />
-          </RotaProtegida>
         } />
       </Routes>
     </Router>
