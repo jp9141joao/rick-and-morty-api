@@ -26,7 +26,7 @@ export default function Entrar() {
             setCarregando(true);
 
             const response = await autentica({ email, senha } as Login);
-
+            //alert(response.error)
             if (response.success) {
                 localStorage.setItem("authToken", response.data);
                 navigate("/central");
@@ -39,11 +39,11 @@ export default function Entrar() {
                         description: 'E-mail não foi informado. Forneça um e-mail para continuar.',
                     });                    
 
-                } else if (response.error == "Erro: E-mail com Formato Invalido!") {
+                } else if (response.error == "Erro: E-mail com Formato Inválido!") {
                     setAvisoInput("Email");
                     toast({
                         variant: 'destructive',
-                        title: 'E-mail com Formato Invalido',
+                        title: 'E-mail com Formato Inválido',
                         description: 'O formato do endereço de e-mail inserido é inválido. Verifique e tente novamente.',
                     });
 
@@ -54,11 +54,11 @@ export default function Entrar() {
                         title: 'Senha não Informada',
                         description: 'Senha não foi informado. Forneça um senha para continuar.',
                     });                    
-                } else if (response.error == "Erro: Senha com Formato Invalido!") {
+                } else if (response.error == "Erro: Senha com Formato Inválido!") {
                     setAvisoInput("Senha");
                     toast({
                         variant: 'destructive',
-                        title: 'Senha com Formato Invalido',
+                        title: 'Senha com Formato Inválido',
                         description: 'O formato da senha inserido é inválido. Forneça uma senha que atenda aos critérios mínimos, incluindo pelo menos uma letra maiúscula, um número e um caractere especial e no minimo 8 caracteres.',
                     });
 

@@ -143,11 +143,11 @@ export default function Central() {
                         description: 'Nova Senha não foi informado. Forneça um nova senha para continuar.',
                     });                    
 
-                } else if (response.error == "Erro: Nova Senha com Formato Invalido!") {
+                } else if (response.error == "Erro: Nova Senha com Formato Inválido!") {
                     setAvisoInput("Nova-Senha");
                     toast({
                         variant: 'destructive',
-                        title: 'Nova Senha com Formato Invalido',
+                        title: 'Nova Senha com Formato Inválido',
                         description: 'O formato da nova senha inserido é inválido. Forneça uma nova senha que atenda aos critérios mínimos, incluindo pelo menos uma letra maiúscula, um número e um caractere especial e no minimo 8 caracteres.',
                     });
 
