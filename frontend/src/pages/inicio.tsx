@@ -38,15 +38,21 @@ export default function Inicio() {
         <PaginaCorpo>
             {/* <PaginaTopo> define o cabeçalho da página */}
             <PaginaTopo>
-                {/* Cabeçalho com um elemento <header> que inclui uma <nav> para a navegação */}
-                <header className="w-full top-0 font-semibold text-gray-900 ">
-                    <nav className="flex justify-end xxs:text-lg xl:text-xl mx-5 my-3">
-                        {/* Link que direciona para a página de login */}
-                        <Link to="/entrar">
-                            Entrar
-                        </Link>
-                    </nav>
-                </header>
+                {/* 
+                    Cabeçalho com um elemento <header> que inclui uma <nav> para a navegação 
+                    flex: Organiza os elementos usando flexbox, oque facilita a organização e o alinhamento dos componentes.
+                    justify-center: Centraliza os itens tanto horizontalmente quanto verticalmente dentro do componente, funcionando exclusivamente no display flex
+                    xxs:text-lg: Em telas maiores que 390px, ajusta o tamanho do texto para "lg".
+                    xl:text-xl: Em telas maiores que 1536px, ajusta o tamanho do texto para "xl".
+                    mx-5: Define a margem horizontal de 5 para cada lado, proporcionando espaçamento relativo ao tamanho da tela.
+                    my-3: Define a margem vertical de 3 para cada lado, proporcionando espaçamento relativo ao tamanho da tela.
+                */}
+                <nav className="flex justify-end xxs:text-lg xl:text-xl mx-5 my-3">
+                    {/* Link que direciona para a página de login */}
+                    <Link to="/entrar">
+                        Entrar
+                    </Link>
+                </nav>
             </PaginaTopo>
 
             {/* <PaginaMeio> contém o conteúdo principal da página */}
@@ -58,15 +64,15 @@ export default function Inicio() {
                     mx-[6.8vw]: Define a margem horizontal de 6.8vw para cada lado, proporcionando espaçamento relativo ao tamanho da tela.
                     xs:mx-[14.2vw]: Em telas maiores de 450px, a margem horizontal aumenta para 14.2vw, garantindo um espaçamento maior.
                     lg:mx-0: Em telas maiores que 1024px, a margem horizontal é removida, fazendo com que o container ocupe toda a largura disponível.
-                    lg:mb-[10vw]: Em telas grandes, adiciona uma margem inferior de 10vw da largura, para criar um espaçamento extra abaixo do container.
+                    lg:mb-[10vw]: Em telas maiores que 1024px adiciona uma margem inferior de 10vw da largura, para criar um espaçamento extra abaixo do container.
                 */}
                 <div className="grid gap-8 sm:gap-14 mx-[6.8vw] xs:mx-[14.2vw] lg:mx-0 lg:mb-[10vw]">
                     {/*
                         grid: Define o container como um display grid, permitindo organizar os elementos filhos em linhas e colunas.
                         place-items-center: Centraliza os itens tanto horizontalmente quanto verticalmente dentro da grade.
                         items-center: Alinha os itens no centro ao longo do eixo da linha, reforçando a centralização.
-                        gap-4: Define um espaçamento de 4px entre os itens da grade.
-                        lg:gap-6: Em telas maiores que 1024px, aumenta o espaçamento entre os itens para gap de 6px.
+                        gap-4: Define um espaçamento de 4 entre os itens da grade.
+                        lg:gap-6: Em telas maiores que 1024px, aumenta o espaçamento entre os itens para gap de 6.
                     */}
                     <div className="grid place-items-center items-center gap-4 lg:gap-6">
                         {/*
@@ -86,14 +92,14 @@ export default function Inicio() {
                             <h1 className="font-semibold text-[8.9vw] xxs:text-[10vw] xs:text-[7.3vw] lg:text-[4.5vw] leading-[1.2]">
                                 Explore o universo de Rick and Morty!
                             </h1>
-                             {/*
+                            {/*
                                 xxs:text-lg: Em telas maiores que 390px, define o tamanho do texto como "lg".
                                 xs:text-xl: Em telas maiores que 450px, define o tamanho do texto como "xl".
                                 sm:text-[2.7vw]: Em telas maiores que 640px, o tamanho do texto é ajustado para 2.7vw.
                                 lg:text-xl: Em telas maiores que 1024px, o tamanho do texto volta a ser "xl".
                                 xl:text-[1.8vw]: Em telas maiores que 1536px, o tamanho do texto é ajustado para 1.8vw.
                                 xl:leading-[1.2]: Em telas maiores que 1536px, define a altura da linha como 1.2, garantindo um espaçamento adequado entre as linhas.
-                                mt-2: Adiciona uma margem superior de 2px, criando um pequeno espaçamento acima do parágrafo.
+                                mt-2: Adiciona uma margem superior de 2, criando um pequeno espaçamento acima do parágrafo.
                             */}
                             <p className="xxs:text-lg xs:text-xl sm:text-[2.7vw] lg:text-xl xl:text-[1.8vw] xl:leading-[1.2] mt-2">
                                 Uma experiência interativa para explorar personagens através de uma API.
@@ -102,16 +108,35 @@ export default function Inicio() {
 
                         {/* 
                             Botão que aciona um diálogo para exibir informações sobre a animação 
-                            lg:w-full: Em telas maiores 
+                            lg:w-full: Em telas maiores que 1024px a width ira preencher todo componente
                         */}
                         <div className="lg:w-full">
                             <Dialog>
-                                {/* DialogTrigger envolve o botão e define a interação para abrir o diálogo */}
+                                {/* 
+                                    DialogTrigger envolve o botão e define a interação para abrir o diálogo 
+                                    hover:-mt-1: Quando o usuário passa o mouse sobre o elemento, ele se move 1 para cima.
+                                    hover:mb-1: Quando o usuário passa o mouse sobre o elemento, ele adiciona uma margem inferior de 1, para compensar o movimento do -mt-1.
+                                    transition-all: Aplica uma transição suave para todas as propriedades animáveis, garantindo que os efeitos de hover aconteçam de forma fluida.
+                                    asChild: Faz com que o DialogTrigger repasse suas propriedades ao primeiro filho direto, permitindo que qualquer elemento seja usado como gatilho do diálogo. 
+                                */}
                                 <DialogTrigger className="hover:-mt-1 hover:mb-1 transition-all" asChild>
                                     <div>
+                                        {/*
+                                        size={"xl"}: Define o tamanho do botão como extra grande.
+                                        xxs:text-lg: Em telas maiores que 390px, define o tamanho do texto como "lg".
+                                        text-lg: Define o tamanho padrão do texto como "lg".
+                                        sm:text-xl: Em telas pequenas maiores que 640px, aumenta o tamanho do texto para "xl".
+                                        xl:text-xl: Em telas maiores que 1536px, mantém o tamanho do texto como "xl".
+                                        sm:h-12: Em telas em telas maiores que 640px, define a altura do botão como 12.
+                                        lg:h-10: Em telas maiores que 1024px, ajusta a altura do botão para 10.
+                                        sm:px-16: Em telas em telas maiores que 640px, define um padding horizontal de 16.
+                                        xl:h-12: Em telas maiores que 1536px, define a altura do botão como 12.
+                                        xl:px-18: Em telas maiores que 1536px, define um padding horizontal de 18.
+                                        shadow-xl: Adiciona uma sombra grande ao botão, dando um efeito de profundidade.
+                                        */}
                                         <Button 
                                             size={"xl"} 
-                                            className="xxsS:text-lg text-lg sm:text-xl xl:text-xl sm:h-12 lg:h-10 sm:px-16 sm:px-12 xl:h-12 xl:px-18 shadow-xl "
+                                            className="xxs:text-lg text-lg sm:text-xl xl:text-xl sm:h-12 lg:h-10 sm:px-16 xl:h-12 xl:px-18 shadow-xl "
                                         >
                                             Sobre a animação
                                         </Button>
@@ -123,8 +148,16 @@ export default function Inicio() {
                                         <DialogTitle>
                                             Sobre Rick and Morty
                                         </DialogTitle>
-                                        {/* DialogDescription com um grid que organiza os parágrafos explicativos */}
+                                        {/* 
+                                            DialogDescription com um grid que organiza os parágrafos explicativos 
+                                            asChild: Faz com que o DialogTrigger repasse suas propriedades ao primeiro filho direto, permitindo que qualquer elemento seja usado como gatilho do diálogo. 
+
+                                        */}
                                         <DialogDescription asChild>
+                                            {/*
+                                                grid: Define o container como um display grid, permitindo organizar os elementos filhos em linhas e colunas.
+                                                gap-3: Define um espaçamento de 3 entre os itens da grade.
+                                            */}
                                             <div className="grid gap-3">
                                                 <p>
                                                     É uma das séries animadas mais populares do momento. Ela junta ficção científica, humor ácido e críticas socias. Esta obra foi feita por Justin Roiland e Dan Harmon e a animação foi lançada em 2013 no Adult Swim e sem muita demora conquistou fãs ao redor do mundo todo.
@@ -146,17 +179,35 @@ export default function Inicio() {
                         </div>
                     </div>
 
-                    {/* Exibição da imagem de forma responsiva */}
+                    {/* 
+                        Exibição da imagem de forma responsiva
+                        lg:hidden: Em telas maiores que 1536px o componente ira ficar com display none 
+                    */}
                     <div className="lg:hidden">
-                        {/* Imagem exibida em dispositivos menores */}
+                        {/* 
+                            Imagem exibida em dispositivos menores 
+                            px-[4vw]: Define um padding horizontal de 4vw.
+                            xxs:px-0: Em telas maiores que 390px, remove completamente o padding horizontal.
+                            xs:px-[6vw]: Em telas maiores que 450px, aumenta o padding horizontal para 6vw.
+                            sm:px-[4vw]: Em telas maiores que 640px, redefine o padding horizontal para 4vw.
+                        */}
                         <img 
                             src={Image}
                             className="px-[4vw] xxs:px-0 xs:px-[6vw] sm:px-[4vw]"
                         />
                     </div>
                 </div>
+                {/* 
+                    Exibição da imagem de forma responsiva
+                    hidden: O componente fica com display none por padrao.
+                    lg:block: Em telas maiores que 1024px o componente fica visivel, 
+                    isso e necessario pois em telas maiores que 1024px a tela tera duas colunas.
+                */}
                 <div className="hidden lg:block">
-                    {/* Imagem exibida somente em telas grandes */}
+                    {/* 
+                        Imagem exibida somente em telas grandes
+                        px-[5.5vw]: Define um padding horizontal de 5.5vw.
+                    */}
                     <img 
                         src={Image}
                         className="px-[5.5vw]"

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Input, InputSenha } from "@/components/ui/input";
-import { AlterarInfo, Filtro, Navegacao, Personagem, Usuario } from "@/types/types";
+import { Info, Filtro, Navegacao, Personagem, Usuario } from "@/types/types";
 import { toast } from "@/hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { getUsuario, mudarInfo } from "@/service/service";
@@ -43,7 +43,7 @@ export default function Central() {
             e.preventDefault();
             setCarregando(true);
 
-            const response = await mudarInfo({ nome, email, operacao: "Info" } as AlterarInfo);
+            const response = await mudarInfo({ nome, email, operacao: "Info" } as Info);
 
             if (response.success) {
                 carregarUsuario();
@@ -188,7 +188,7 @@ export default function Central() {
             e.preventDefault();
             setCarregando(true);
 
-            const response = await mudarInfo({ senha, novaSenha } as AlterarInfo);
+            const response = await mudarInfo({ senha, novaSenha } as Info);
 
             if (response.success) {
                 carregarUsuario();
@@ -354,157 +354,155 @@ export default function Central() {
     return (
         <PaginaCorpo>
             <PaginaTopo>
-                <header className="w-full top-0 font-semibold text-gray-900 ">
-                    <nav className="flex justify-between items-center xxs:text-lg xl:text-xl mx-5 my-3">
-                        <div className="flex justify-center items-center gap-2">
-                            <h1 className="font-semibold text-[5vw] xs:text-[3.5vw] sm:text-[3vw] lg:text-[1.6vw] xl:text-xl break-all">
-                                Olá, { usuario?.nome.split(' ')[0] }!👋 
-                            </h1>
-                        </div>
-                        <div>
-                            <Sheet
-                                onOpenChange={(open) => {
-                                    if (!open) {
-                                        setSenha("");
-                                        setNovaSenha("");
-                                        setAvisoInput("");
-                                        setConteudo("Menu");
-                                    }
-                                }}
-                            >
-                                <SheetTrigger className="ml-20" asChild>
-                                    <Menu className="cursor-pointer"/>
-                                </SheetTrigger>
-                                <SheetContent>
-                                    <SheetHeader className="grid place-items-center">
-                                        <SheetTitle className="text-xl ml-3 mt-3">
-                                            {
-                                                conteudo == "Menu" ? "Menu" :
-                                                conteudo == "Mudar-Dados" ? "Mudar Informações" :
-                                                conteudo == "Mudar-Senha" ? "Mudar Senha" : 
-                                                null
-                                            }
-                                        </SheetTitle>
-                                    </SheetHeader>  
-                                    {
-                                        <div className="grid gap-2 mt-3">
-                                            {
-                                                conteudo == "Menu" ?
-                                                <>
-                                                    <div onClick={() => setConteudo("Mudar-Dados")}>
-                                                        <p className="text-lg hover:-translate-y-1 transition-all">
-                                                            Alterar Informações
-                                                        </p>
-                                                    </div>
-                                                    <div onClick={() => setConteudo("Mudar-Senha")}>
-                                                        <p className="text-lg hover:-translate-y-1 transition-all">
-                                                            Alterar Senha
-                                                        </p>
-                                                    </div>
-                                                    <div className="flex gap-1 hover:translate-x-2 transition-all" onClick={handleSair}>
-                                                        <p className="text-lg">
-                                                            <strong>
-                                                                Sair
-                                                            </strong>
-                                                        </p>
-                                                        <MoveRight className="mt-1"/>              
-                                                    </div>
-                                                </> :
-                                                conteudo == "Mudar-Senha" ?
-                                                <>
-                                                    <div className="grid items-center gap-1">
-                                                        <Label htmlFor="senha">
-                                                            Senha
-                                                        </Label>
-                                                        <InputSenha
-                                                            id="senha"
-                                                            value={senha}
-                                                            onChange={(e) => setSenha(e.target.value)}
-                                                            className={avisoInput == "Senha" ? "border-red-500" : ""}
-                                                            onClick={() => setAvisoInput("")}
-                                                        />
-                                                    </div>
-                                                    <div className="grid items-center gap-1">
-                                                        <Label htmlFor="nova-senha">
-                                                            Nova Senha
-                                                        </Label>
-                                                        <InputSenha
-                                                            id="nova-senha"
-                                                            value={novaSenha}
-                                                            onChange={(e) => setNovaSenha(e.target.value)}
-                                                            className={avisoInput == "Nova-Senha" ? "border-red-500" : ""}
-                                                            onClick={() => setAvisoInput("")}
-                                                        />
-                                                    </div>
-                                                </> :
-                                                conteudo == "Mudar-Dados" ?
-                                                <>
-                                                    <div>
-                                                        <Label htmlFor="nome">
-                                                            Nome Completo
-                                                        </Label>
-                                                        <Input
-                                                            id="nome"
-                                                            placeholder="Seu nome completo"
-                                                            value={nome}
-                                                            onChange={(e) => setNome(e.target.value)}
-                                                            className={avisoInput == "Nome" ? "border-red-500" : ""}
-                                                            onClick={() => setAvisoInput("")}
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <Label htmlFor="email">
-                                                            Email
-                                                        </Label>
-                                                        <Input
-                                                            id="email"
-                                                            placeholder="nome@exemplo.com"
-                                                            value={email}
-                                                            onChange={(e) => setEmail(e.target.value)}
-                                                            className={avisoInput == "Email"  ? "border-red-500" : ""}
-                                                            onClick={() => setAvisoInput("")}
-                                                        />
-                                                    </div>
-                                                </> : null
-                                            }
-                                            
-                                        </div>
-                                    }
-                                    {
-                                        conteudo != "Menu" && conteudo != "" ?
-                                        <div className="grid gap-2 w-full mt-3">
-                                            <Button
-                                                className="w-full bg-gradient-to-tr from-[#1a9f9a] to-[#b6c937] text-primary-foreground shadow-lg transition-all duration-300 hover:bg-gradient-to-bl hover:from-[#b6c937] hover:to-[#1a9f9a]"
-                                                type="button"
-                                                disabled={desabilitarBtn}
-                                                onClick={
-                                                    conteudo == "Mudar-Senha" ? 
-                                                    handleMudarSenha :
-                                                    handleMudarDados
-                                                }
-                                            >
-                                                Alterar
-                                            </Button>
-                                            <Button
-                                                variant={"outline"}
-                                                className="w-full"
-                                                type="button"
-                                                onClick={() => setConteudo("Menu")}
-                                            >
-                                                Voltar
-                                            </Button> 
-                                        </div> : null
-                                    }
-                                    <SheetFooter>
-                                    <SheetClose asChild>
+                <nav className="flex justify-between items-center xxs:text-lg xl:text-xl mx-5 my-3">
+                    <div className="flex justify-center items-center gap-2">
+                        <h1 className="font-semibold text-[5vw] xs:text-[3.5vw] sm:text-[3vw] lg:text-[1.6vw] xl:text-xl break-all">
+                            Olá, { usuario?.nome.split(' ')[0] }!👋 
+                        </h1>
+                    </div>
+                    <div>
+                        <Sheet
+                            onOpenChange={(open) => {
+                                if (!open) {
+                                    setSenha("");
+                                    setNovaSenha("");
+                                    setAvisoInput("");
+                                    setConteudo("Menu");
+                                }
+                            }}
+                        >
+                            <SheetTrigger className="ml-20" asChild>
+                                <Menu className="cursor-pointer"/>
+                            </SheetTrigger>
+                            <SheetContent>
+                                <SheetHeader className="grid place-items-center">
+                                    <SheetTitle className="text-xl ml-3 mt-3">
+                                        {
+                                            conteudo == "Menu" ? "Menu" :
+                                            conteudo == "Mudar-Dados" ? "Mudar Informações" :
+                                            conteudo == "Mudar-Senha" ? "Mudar Senha" : 
+                                            null
+                                        }
+                                    </SheetTitle>
+                                </SheetHeader>  
+                                {
+                                    <div className="grid gap-2 mt-3">
+                                        {
+                                            conteudo == "Menu" ?
+                                            <>
+                                                <div onClick={() => setConteudo("Mudar-Dados")}>
+                                                    <p className="text-lg hover:-translate-y-1 transition-all">
+                                                        Alterar Informações
+                                                    </p>
+                                                </div>
+                                                <div onClick={() => setConteudo("Mudar-Senha")}>
+                                                    <p className="text-lg hover:-translate-y-1 transition-all">
+                                                        Alterar Senha
+                                                    </p>
+                                                </div>
+                                                <div className="flex gap-1 hover:translate-x-2 transition-all" onClick={handleSair}>
+                                                    <p className="text-lg">
+                                                        <strong>
+                                                            Sair
+                                                        </strong>
+                                                    </p>
+                                                    <MoveRight className="mt-1"/>              
+                                                </div>
+                                            </> :
+                                            conteudo == "Mudar-Senha" ?
+                                            <>
+                                                <div className="grid items-center gap-1">
+                                                    <Label htmlFor="senha">
+                                                        Senha
+                                                    </Label>
+                                                    <InputSenha
+                                                        id="senha"
+                                                        value={senha}
+                                                        onChange={(e) => setSenha(e.target.value)}
+                                                        className={avisoInput == "Senha" ? "border-red-500" : ""}
+                                                        onClick={() => setAvisoInput("")}
+                                                    />
+                                                </div>
+                                                <div className="grid items-center gap-1">
+                                                    <Label htmlFor="nova-senha">
+                                                        Nova Senha
+                                                    </Label>
+                                                    <InputSenha
+                                                        id="nova-senha"
+                                                        value={novaSenha}
+                                                        onChange={(e) => setNovaSenha(e.target.value)}
+                                                        className={avisoInput == "Nova-Senha" ? "border-red-500" : ""}
+                                                        onClick={() => setAvisoInput("")}
+                                                    />
+                                                </div>
+                                            </> :
+                                            conteudo == "Mudar-Dados" ?
+                                            <>
+                                                <div>
+                                                    <Label htmlFor="nome">
+                                                        Nome Completo
+                                                    </Label>
+                                                    <Input
+                                                        id="nome"
+                                                        placeholder="Seu nome completo"
+                                                        value={nome}
+                                                        onChange={(e) => setNome(e.target.value)}
+                                                        className={avisoInput == "Nome" ? "border-red-500" : ""}
+                                                        onClick={() => setAvisoInput("")}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <Label htmlFor="email">
+                                                        Email
+                                                    </Label>
+                                                    <Input
+                                                        id="email"
+                                                        placeholder="nome@exemplo.com"
+                                                        value={email}
+                                                        onChange={(e) => setEmail(e.target.value)}
+                                                        className={avisoInput == "Email"  ? "border-red-500" : ""}
+                                                        onClick={() => setAvisoInput("")}
+                                                    />
+                                                </div>
+                                            </> : null
+                                        }
                                         
-                                    </SheetClose>
-                                    </SheetFooter>
-                                </SheetContent>
-                            </Sheet>
-                        </div>
-                    </nav>
-                </header>
+                                    </div>
+                                }
+                                {
+                                    conteudo != "Menu" && conteudo != "" ?
+                                    <div className="grid gap-2 w-full mt-3">
+                                        <Button
+                                            className="w-full bg-gradient-to-tr from-[#1a9f9a] to-[#b6c937] text-primary-foreground shadow-lg transition-all duration-300 hover:bg-gradient-to-bl hover:from-[#b6c937] hover:to-[#1a9f9a]"
+                                            type="button"
+                                            disabled={desabilitarBtn}
+                                            onClick={
+                                                conteudo == "Mudar-Senha" ? 
+                                                handleMudarSenha :
+                                                handleMudarDados
+                                            }
+                                        >
+                                            Alterar
+                                        </Button>
+                                        <Button
+                                            variant={"outline"}
+                                            className="w-full"
+                                            type="button"
+                                            onClick={() => setConteudo("Menu")}
+                                        >
+                                            Voltar
+                                        </Button> 
+                                    </div> : null
+                                }
+                                <SheetFooter>
+                                <SheetClose asChild>
+                                    
+                                </SheetClose>
+                                </SheetFooter>
+                            </SheetContent>
+                        </Sheet>
+                    </div>
+                </nav>
             </PaginaTopo>
             <PaginaMeioUmaColuna className="place-items-start px-[13.3vw] xxs:px-[14.8vw] lg:px-[20vw]">
                 <div className="w-full">
