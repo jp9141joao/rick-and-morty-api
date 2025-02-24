@@ -29,29 +29,45 @@ export default function Entrar() {
 
             if (response.success) {
                 localStorage.setItem("authToken", response.data);
-                navigate("/central-de-personagens");
+                navigate("/central");
             } else {
-                if (response.error = "Erro: E-mail Inválido!") {
+                if (response.error == "Erro: E-mail não Informado!") {
                     setAvisoInput("Email");
                     toast({
                         variant: 'destructive',
-                        title: 'E-mail Inválido',
-                        description: 'O endereço de e-mail inserido é inválido. Verifique e tente novamente',
+                        title: 'E-mail não Informado',
+                        description: 'E-mail não foi informado. Forneça um e-mail para continuar.',
+                    });                    
+
+                } else if (response.error == "Erro: E-mail com Formato Invalido!") {
+                    setAvisoInput("Email");
+                    toast({
+                        variant: 'destructive',
+                        title: 'E-mail com Formato Invalido',
+                        description: 'O formato do endereço de e-mail inserido é inválido. Verifique e tente novamente.',
                     });
 
-                } else if (response.error == "Erro: Senha Inválida!") {
+                } else if (response.error == "Erro: Senha não Informada!") {
                     setAvisoInput("Senha");
                     toast({
                         variant: 'destructive',
-                        title: 'Senha Inválida',
-                        description: 'A senha inserida é inválida. Verifique e tente novamente.',
+                        title: 'Senha não Informada',
+                        description: 'Senha não foi informado. Forneça um senha para continuar.',
+                    });                    
+                } else if (response.error == "Erro: Senha com Formato Invalido!") {
+                    setAvisoInput("Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Senha com Formato Invalido',
+                        description: 'O formato da senha inserido é inválido. Forneça uma senha que atenda aos critérios mínimos, incluindo pelo menos uma letra maiúscula, um número e um caractere especial e no minimo 8 caracteres.',
                     });
-                }  else if (response.error == "Erro: E-mail ou Senha Inválidos") {
+
+                }  else if (response.error == "Erro: E-mail ou Senha Incorretos!") {
                     setAvisoInput("Email-Senha")
                     toast({
                         variant: 'destructive', 
-                        title: 'E-mail ou senha Inválidos', 
-                        description: 'O e-mail ou a senha inseridos são inválidos. Por favor, tente novamente.', 
+                        title: 'E-mail ou Senha Incorretos', 
+                        description: 'O e-mail ou a senha inseridos são incorretos. Por favor, tente novamente.', 
                     });
 
                 } else {
@@ -59,7 +75,7 @@ export default function Entrar() {
                 }
             }
         } catch (error: any) {
-            toast({
+            toast({ 
                 variant: 'destructive',
                 title: "Ah não! Algo deu errado.",
                 description: "Houve um problema com sua solicitação. Tente novamente mais tarde!",

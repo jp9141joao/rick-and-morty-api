@@ -4,9 +4,18 @@ import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Creditos } from "@/components/Creditos";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 
 export default function Inicio() {
+
+    useEffect(() => {
+        const token = localStorage.getItem('authToken');
+
+        if (!token) {
+            localStorage.removeItem('authToken');
+        }
+    }, []);
     
     return (
         <PaginaCorpo>

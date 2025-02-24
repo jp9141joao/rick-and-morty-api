@@ -6,7 +6,7 @@ const url = 'http://localhost:3000';
 export const autentica = async (login: Login) => {
     
     if (!login) {
-        throw new Error("Erro: O parâmetro login está faltando!");
+        throw new Error("Erro: O parâmetro login não está definido!");
     }
 
     const response = await axios.post(`${url}/entrar`, login, {
@@ -21,14 +21,10 @@ export const autentica = async (login: Login) => {
 export const cadastrar = async (usuario: Usuario) => {
     
     if (!usuario) {
-        throw new Error("Erro: O parâmetro usuario está faltando!");
+        throw new Error("Erro: O parâmetro usuario não está definido!");
     }
 
-    const response = await axios.post(`${url}/entrar`, usuario, {
-        validateStatus: (status) => {
-            return status != 400;
-        }
-    });
+    const response = await axios.post(`${url}/cadastrar`, usuario)
 
     return response.data;
 };
@@ -37,7 +33,7 @@ export const getUsuario = async () => {
     const token = localStorage.getItem("authToken");
 
     if (!token) {
-        throw new Error("Erro: O token está faltando!")
+        throw new Error("Erro: O token não está definido!")
     }
 
     const response = await axios.get(`${url}/central`, {
@@ -56,11 +52,11 @@ export const mudarInfo = async (info: AlterarInfo) => {
     const token = localStorage.getItem("authToken");
 
     if (!token) {
-        throw new Error("Erro: O token está faltando!")
+        throw new Error("Erro: O token não está definido!")
     }
 
     if (!info) {
-        throw new Error("Erro: O parâmetro info está faltando!");
+        throw new Error("Erro: O parâmetro info não está definido!");
     }
 
     const response = await axios.put(`${url}/central`, info, {

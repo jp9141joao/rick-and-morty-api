@@ -1,6 +1,7 @@
 import { Creditos } from "@/components/Creditos";
 import { PaginaCorpo, PaginaMeioUmaColuna, PaginaRodape, PaginaTopo } from "@/components/PageLayout/LayoutPagina";
 import { Voltar } from "@/components/Voltar";
+import { useEffect } from "react";
 
 export default function PaginaNaoEncontrada() {
 

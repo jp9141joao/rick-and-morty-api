@@ -12,7 +12,7 @@ export type Usuario = {
 export type Personagem = {
     id: string, 
     nome: string,
-    estatus: string
+    status: string
     localizacao: string,
     imagem: string
 }
@@ -22,6 +22,7 @@ export type AlterarInfo = {
     email?: string,
     senha?: string,
     novaSenha?: string
+    operacao: string
 }
 
 export type Filtro = {

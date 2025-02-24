@@ -35,7 +35,7 @@ export default function Central() {
     const [navegacao, setNavegacao] = useState<Navegacao>({
         voltar: null, proximo: ''
     });
-    const dadosMenu: string[] = ['Nome', 'Estatus', 'Localizacao'];
+    const dadosMenu: string[] = ['Nome', 'Status', 'Especie', 'Genero','Localizacao'];
     const api = `https://rickandmortyapi.com/api/character?page=${numeroPagina}`
 
     const handleMudarDados = async (e: React.FormEvent) => {
@@ -43,21 +43,35 @@ export default function Central() {
             e.preventDefault();
             setCarregando(true);
 
-            const response = await mudarInfo({ nome, email } as AlterarInfo);
-
+            const response = await mudarInfo({ nome, email, operacao: "Info" } as AlterarInfo);
+            //alert(JSON.stringify(response, null, 2));
             if (response.success) {
                 carregarUsuario();
                 setDesabilitarBtn(true);
+
+                toast({
+                    variant: 'success',
+                    title: 'Informações atualizadas!',
+                    description: 'Suas informações foram alteradas com sucesso.',
+                });
             } else {
-                if (response.error = "Erro: Nome Completo Inválido!") {
+                if (response.error == "Erro: Nome Completo não Informado!") {
                     setAvisoInput("Nome");
                     toast({
                         variant: 'destructive',
-                        title: 'Nome Completo Inválido',
-                        description: 'Por favor, forneça um nome completo válido contendo apenas letras e espaços.',
+                        title: 'Nome Completo não Informado',
+                        description: 'Nome Completo não foi informado. Forneça um nome completo para continuar.',
                     });                    
 
-                } else if (response.error = "Erro: Nome Completo Muito Grande!") {
+                } else if (response.error == "Erro: Nome Completo com Formato Inválido!") {
+                    setAvisoInput("Nome");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Nome Completo com Formato Inválido',
+                        description: 'O formato do endereço de e-mail inserido é inválido. Forneça um nome completo válido contendo apenas letras e espaços.',
+                    });                    
+
+                } else if (response.error == "Erro: Nome Completo Muito Grande!") {
                     setAvisoInput("Nome");
                     toast({
                         variant: 'destructive',
@@ -65,15 +79,23 @@ export default function Central() {
                         description: 'O nome completo inserido é muito grande. Insira um nome completo menor',
                     });
 
-                } else if (response.error = "Erro: E-mail Inválido!") {
+                } else if (response.error == "Erro: E-mail não Informado!") {
                     setAvisoInput("Email");
                     toast({
                         variant: 'destructive',
-                        title: 'E-mail Inválido',
-                        description: 'O endereço de e-mail inserido é inválido. Verifique e tente novamente',
+                        title: 'E-mail não Informado',
+                        description: 'E-mail não foi informado. Forneça um e-mail para continuar.',
+                    });                    
+
+                } else if (response.error == "Erro: E-mail com Formato Inválido!") {
+                    setAvisoInput("Email");
+                    toast({
+                        variant: 'destructive',
+                        title: 'E-mail com Formato Inválido',
+                        description: 'O formato do endereço de e-mail inserido é inválido. Verifique e tente novamente.',
                     });
 
-                }  else if (response.error = "Erro: E-mail Muito Grande!") {
+                } else if (response.error == "Erro: E-mail Muito Grande!") {
                     setAvisoInput("Email");
                     toast({
                         variant: 'destructive',
@@ -81,7 +103,71 @@ export default function Central() {
                         description: 'O e-mail inserido é muito grande. Insira um e-mail menor',
                     });
                     
-                } else {
+                } else if (response.error == "Erro: E-mail Já Cadastrado!") {
+                    setAvisoInput("Email");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Erro: E-mail Já Cadastrado',
+                        description: 'O e-mail inserido já está cadastrado!. Insira um novo e-mail.',
+                    });
+                    
+                } else if (response.error == "Erro: Senha não Informada!") {
+                    setAvisoInput("Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Senha não Informada',
+                        description: 'Senha não foi informado. Forneça um senha para continuar.',
+                    });                    
+
+                } else if (response.error == "Erro: Senha com Formato Inválido!") {
+                    setAvisoInput("Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Senha com Formato Inválido',
+                        description: 'O formato da senha inserido é inválido. Forneça uma senha que atenda aos critérios mínimos, incluindo pelo menos uma letra maiúscula, um número e um caractere especial e no minimo 8 caracteres.',
+                    });
+
+                } else if (response.error == "Erro: Senha Incorreta!") {
+                    setAvisoInput("Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Senha Inválido',
+                        description: 'A senha informada está incorreta. Por favor, verifique e tente novamente.',
+                    });
+
+                } else if (response.error == "Erro: Nova Senha não Informada!") {
+                    setAvisoInput("Nova-Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Nova Senha não Informada',
+                        description: 'Nova Senha não foi informado. Forneça um nova senha para continuar.',
+                    });                    
+
+                } else if (response.error == "Erro: Nova Senha com Formato Invalido!") {
+                    setAvisoInput("Nova-Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Nova Senha com Formato Invalido',
+                        description: 'O formato da nova senha inserido é inválido. Forneça uma nova senha que atenda aos critérios mínimos, incluindo pelo menos uma letra maiúscula, um número e um caractere especial e no minimo 8 caracteres.',
+                    });
+
+                } else if (response.error == "Erro: Nova Senha Muito Pequena!") {
+                    setAvisoInput("Nova-Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Nova Senha Muito Curta',
+                        description: 'Sua nova senha é muito curta. Por favor, insira uma nova senha com pelo menos 8 caracteres.',
+                    });
+
+                } else if (response.error == "Erro: Nova Senha Muito Grande!") {
+                    setAvisoInput("Nova-Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Nova Senha Muito Grande',
+                        description: 'A nova senha inserida é muito grande. Insira uma nova senha menor',
+                    });
+                    
+                }else {
                     throw new Error("A solicitação falhou. Verifique os dados e tente novamente.");
                 }
             }
@@ -108,6 +194,12 @@ export default function Central() {
                 carregarUsuario();
                 setSenha("");
                 setNovaSenha("");
+
+                toast({
+                    variant: 'success',
+                    title: 'Senha alterada!',
+                    description: 'Sua senha foi alterada com sucesso. Use a nova senha para acessar sua conta.',
+                });
             } else {
                 if (response.error == "Erro: Senha Inválido!") {
                     setAvisoInput("Senha");
@@ -125,7 +217,7 @@ export default function Central() {
                         description: 'Sua senha é muito curta. Por favor, insira uma senha com pelo menos 8 caracteres.',
                     });
 
-                } if (response.error == "Erro: Nova Senha Inválido!") {
+                } if (response.error == "Erro: Nova Senha Inválida!") {
                     setAvisoInput("Nova-Senha");
                     toast({
                         variant: 'destructive',
@@ -177,6 +269,8 @@ export default function Central() {
 
             if (response.success) {
                 setUsuario(response.data);
+                setNome(response.data.nome);
+                setEmail(response.data.email);
             } else {
                 throw new Error("A solicitação falhou. Verifique os dados e tente novamente.");
             }
@@ -203,7 +297,7 @@ export default function Central() {
                     return {
                         id: personagem.id,
                         nome: personagem.name,
-                        estatus: 
+                        status: 
                             personagem.status == "Alive" ? `Viv${g}` :
                             personagem.status == "Dead" ? `Mort${g}` :
                             "Desconhecido",
@@ -239,22 +333,21 @@ export default function Central() {
     };
 
     useEffect(() => {
-        /*
-        if (!usuario) {
-            throw new Error("Erro: Usuario está faltando!");
+
+        if (usuario) {
+            if (((nome != usuario.nome || email != usuario.email) && (nome != "" && email != "")) || (senha != "" && novaSenha != "")) {
+                setDesabilitarBtn(false);
+            } else {
+                setDesabilitarBtn(true);
+            }
+
+
         }
 
-        if (nome != usuario.nome || email != usuario.email) {
-            setDesabilitarBtn(false);
-        } else {
-            setDesabilitarBtn(true);
-        }
-        */
-
-    }, [nome, email]);
+    }, [nome, email, senha, novaSenha]);
 
     useEffect(() => {
-        //carregarUsuario();
+        carregarUsuario();
         carregarPersonagens();
     }, [api]);
 
@@ -264,13 +357,22 @@ export default function Central() {
                 <header className="w-full top-0 font-semibold text-gray-900 ">
                     <nav className="flex justify-between items-center xxs:text-lg xl:text-xl mx-5 my-3">
                         <div className="flex justify-center items-center gap-2">
-                            <h1 className="font-semibold text-[5vw] xs:text-[3.5vw] sm:text-[3vw] lg:text-[1.6vw] xl:text-[1vw] break-all">
-                                Olá, João!👋 
+                            <h1 className="font-semibold text-[5vw] xs:text-[3.5vw] sm:text-[3vw] lg:text-[1.6vw] xl:text-xl break-all">
+                                Olá, { usuario?.nome.split(' ')[0] }!👋 
                             </h1>
                         </div>
                         <div>
-                            <Sheet>
-                                <SheetTrigger asChild>
+                            <Sheet
+                                onOpenChange={(open) => {
+                                    if (!open) {
+                                        setSenha("");
+                                        setNovaSenha("");
+                                        setAvisoInput("");
+                                        setConteudo("Menu");
+                                    }
+                                }}
+                            >
+                                <SheetTrigger className="ml-20" asChild>
                                     <Menu className="cursor-pointer"/>
                                 </SheetTrigger>
                                 <SheetContent>
@@ -492,13 +594,13 @@ export default function Central() {
                                             </div>
                                             <div
                                                 className={`${
-                                                    ["Vivo", "Viva"].includes(personagem.estatus) ? "bg-green-600" : 
-                                                    ["Morto", "Morta"].includes(personagem.estatus) ? "bg-red-500" : 
+                                                    ["Vivo", "Viva"].includes(personagem.status) ? "bg-green-600" : 
+                                                    ["Morto", "Morta"].includes(personagem.status) ? "bg-red-500" : 
                                                     "bg-[#707070]"
                                                 } font-semibold px-5 py-0.5 rounded-r-lg absolute top-0 mt-4 text-white`}
                                             >
                                                 <p className="text-center">
-                                                    { personagem.estatus }
+                                                    { personagem.status }
                                                 </p>
                                             </div>
                                         </CardContent>
@@ -509,7 +611,7 @@ export default function Central() {
 
                             const validData = data.filter((item) => item !== null);
 
-                            return validData.length > 0 ? validData : <p className="text-center">Nenhum personagem foi retornado nessa pagina!</p>;
+                            return validData.length > 0 ? validData : <p className="text-p-responsive text-center absolute  px-[13.3vw] xxs:px-[14.8vw] lg:px-[20vw]">Nenhum personagem foi retornado nessa pagina!</p>;
                         })()
                     }
 

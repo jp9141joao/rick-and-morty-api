@@ -23,7 +23,6 @@ export default function Cadastrar() {
         try {
             e.preventDefault();
             setCarregando(true);
-
             const response = await cadastrar({ nome, email, senha } as Usuario);
 
             if (response.success) {
@@ -37,15 +36,23 @@ export default function Cadastrar() {
                 setEmail("");
                 setSenha("");
             } else {
-                if (response.error = "Erro: Nome Completo Inválido!") {
+                if (response.error == "Erro: Nome Completo não Informado!") {
                     setAvisoInput("Nome");
                     toast({
                         variant: 'destructive',
-                        title: 'Nome Completo Inválido',
-                        description: 'Por favor, forneça um nome completo válido contendo apenas letras e espaços.',
+                        title: 'Nome Completo não Informado',
+                        description: 'Nome Completo não foi informado. Forneça um nome completo para continuar.',
                     });                    
 
-                } else if (response.error = "Erro: Nome Completo Muito Grande!") {
+                } else if (response.error == "Erro: Nome Completo com Formato Inválido!") {
+                    setAvisoInput("Nome");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Nome Completo com Formato Inválido',
+                        description: 'O formato do endereço de e-mail inserido é inválido. Forneça um nome completo válido contendo apenas letras e espaços.',
+                    });                    
+
+                } else if (response.error == "Erro: Nome Completo Muito Grande!") {
                     setAvisoInput("Nome");
                     toast({
                         variant: 'destructive',
@@ -53,15 +60,23 @@ export default function Cadastrar() {
                         description: 'O nome completo inserido é muito grande. Insira um nome completo menor',
                     });
 
-                } else if (response.error = "Erro: E-mail Inválido!") {
+                } else if (response.error == "Erro: E-mail não Informado!") {
                     setAvisoInput("Email");
                     toast({
                         variant: 'destructive',
-                        title: 'E-mail Inválido',
-                        description: 'O endereço de e-mail inserido é inválido. Verifique e tente novamente',
+                        title: 'E-mail não Informado',
+                        description: 'E-mail não foi informado. Forneça um e-mail para continuar.',
+                    });                    
+
+                } else if (response.error == "Erro: E-mail com Formato Inválido!") {
+                    setAvisoInput("Email");
+                    toast({
+                        variant: 'destructive',
+                        title: 'E-mail com Formato Inválido',
+                        description: 'O formato do endereço de e-mail inserido é inválido. Verifique e tente novamente.',
                     });
 
-                }  else if (response.error = "Erro: E-mail Muito Grande!") {
+                } else if (response.error == "Erro: E-mail Muito Grande!") {
                     setAvisoInput("Email");
                     toast({
                         variant: 'destructive',
@@ -69,15 +84,31 @@ export default function Cadastrar() {
                         description: 'O e-mail inserido é muito grande. Insira um e-mail menor',
                     });
                     
-                } else if (response.error == "Erro: Senha Inválido!") {
+                } else if (response.error == "Erro: E-mail Já Cadastrado!") {
+                    setAvisoInput("Email");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Erro: E-mail Já Cadastrado',
+                        description: 'O e-mail inserido já está cadastrado!. Insira um novo e-mail.',
+                    });
+                    
+                } else if (response.error == "Erro: Senha não Informada!") {
                     setAvisoInput("Senha");
                     toast({
                         variant: 'destructive',
-                        title: 'Senha Inválida',
-                        description: 'Por favor, forneça uma senha que atenda aos critérios mínimos, incluindo pelo menos uma letra maiúscula, um número e um caractere especial.',
+                        title: 'Senha não Informada',
+                        description: 'Senha não foi informado. Forneça um senha para continuar.',
+                    });                    
+
+                } else if (response.error == "Erro: Senha com Formato Inválido!") {
+                    setAvisoInput("Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Senha com Formato Inválido',
+                        description: 'O formato da senha inserido é inválido. Forneça uma senha que atenda aos critérios mínimos, incluindo pelo menos uma letra maiúscula, um número e um caractere especial e no minimo 8 caracteres.',
                     });
 
-                } else if (response.error = "Erro: Senha Muito Pequena!") {
+                } else if (response.error == "Erro: Senha Muito Pequena!") {
                     setAvisoInput("Senha");
                     toast({
                         variant: 'destructive',
@@ -85,7 +116,15 @@ export default function Cadastrar() {
                         description: 'Sua senha é muito curta. Por favor, insira uma senha com pelo menos 8 caracteres.',
                     });
 
-                } else {
+                } else if (response.error == "Erro: Senha Muito Grande!") {
+                    setAvisoInput("Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Senha Muito Grande',
+                        description: 'A senha inserida é muito grande. Insira uma senha menor',
+                    });
+                    
+                }else {
                     throw new Error("A solicitação falhou. Verifique os dados e tente novamente.");
                 }
             }
@@ -133,7 +172,7 @@ export default function Cadastrar() {
                                 <Input
                                     id="nome"
                                     placeholder="Seu nome completo"
-                                    value={email}
+                                    value={nome}
                                     onChange={(e) => setNome(e.target.value)}
                                     className={avisoInput == "Nome" ? "border-red-500" : ""}
                                     onClick={() => setAvisoInput("")}
@@ -183,7 +222,7 @@ export default function Cadastrar() {
                 <div>
                     <img 
                         src={Image}
-                        className="px-[18vw] xxs:px-[12vw] xs:px-[24vw] sm:px-[26vw] lg:px-[8vw]"
+                        className="my-4 px-[18vw] xxs:px-[12vw] xs:px-[24vw] sm:px-[26vw] lg:px-[8vw]"
                     />
                 </div>
             </PaginaMeio>
