@@ -13,6 +13,7 @@ import { getUsuario, mudarInfo } from "@/service/service";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { Spinner } from "@/components/ui/spinner";
 
 
 
@@ -482,7 +483,11 @@ export default function Central() {
                                                 handleMudarDados
                                             }
                                         >
-                                            Alterar
+                                            {
+                                                carregando ?
+                                                <Spinner /> :
+                                                "Alterar"
+                                            }
                                         </Button>
                                         <Button
                                             variant={"outline"}
