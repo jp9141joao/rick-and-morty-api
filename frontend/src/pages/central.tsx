@@ -44,7 +44,7 @@ export default function Central() {
             setCarregando(true);
 
             const response = await mudarInfo({ nome, email, operacao: "Info" } as AlterarInfo);
-            //alert(JSON.stringify(response, null, 2));
+
             if (response.success) {
                 carregarUsuario();
                 setDesabilitarBtn(true);

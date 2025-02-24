@@ -21,7 +21,7 @@ export const autentica = async (req: Request, res: Response): Promise<void> => {
         if (!SECRET_KEY) {
             throw new Error("SECRET_KEY não está definido no arquivo .env!");
         }
-        console.log(Utils.EmailValido(email))
+
         if (!Utils.ValorExiste(email)) {
             res.status(200).json(HttpResult.Fail("Erro: E-mail não Informado!"));
             return;
@@ -141,7 +141,7 @@ export const criarConta = async (req: Request, res: Response): Promise<void> => 
 
         res.status(200).json(HttpResult.Success("Conta criada com sucesso!"));
     } catch (erro: any) {
-        console.log(erro);
+        console.error(erro);
         res.status(400).json(HttpResult.Fail("Ocorreu um erro inesperado no criarConta."));
         return;
     }

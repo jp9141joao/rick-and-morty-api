@@ -143,7 +143,7 @@ export default function Cadastrar() {
     useEffect(() => {
         const token = localStorage.getItem('authToken');
 
-        if (!token) {
+        if (token) {
             localStorage.removeItem('authToken');
         }
     }, []);

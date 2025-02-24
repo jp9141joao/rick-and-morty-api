@@ -89,7 +89,7 @@ export default function Entrar() {
     useEffect(() => {
         const token = localStorage.getItem('authToken');
 
-        if (!token) {
+        if (token) {
             localStorage.removeItem('authToken');
         }
     }, []);

@@ -12,7 +12,7 @@ export default function Inicio() {
     useEffect(() => {
         const token = localStorage.getItem('authToken');
 
-        if (!token) {
+        if (token) {
             localStorage.removeItem('authToken');
         }
     }, []);
