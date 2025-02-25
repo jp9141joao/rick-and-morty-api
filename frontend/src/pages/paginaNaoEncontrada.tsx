@@ -26,7 +26,13 @@ export default function PaginaNaoEncontrada() {
 
             {/* Área central da página com layout de coluna única */}
             <PaginaMeioUmaColuna>
-                {/* Div que centraliza o conteúdo, textos e aplica margens horizontais */}
+                {/* 
+                    Div que centraliza o conteúdo, textos e aplica margens horizontais.
+                    grid: Define o container como um display grid, permitindo organizar os elementos filhos em linhas e colunas.
+                    place-items-center: Centraliza os itens tanto horizontalmente quanto verticalmente dentro da grade.
+                    text-center: Centraliza o texto horizontalmente.
+                    mx-[13vw]: Define a margem horizontal de 13vw para cada lado.
+                */}
                 <div className="grid place-items-center text-center mx-[13vw]">
                     <div>
                         {/* Título principal informando que a página não foi encontrada */}

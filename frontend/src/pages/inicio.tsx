@@ -7,8 +7,15 @@
 import { PaginaCorpo, PaginaRodape, PaginaMeio, PaginaTopo } from "../components/PageLayout/LayoutPagina";
 import Image from '../assets/Rick-and-morty-desenho-animado-warner-artpoin9-724x1024.png'; // Importa a imagem que será utilizada na pagina.
 
-// Importa o componente <Button> e os componentes do diálogo para a interface interativa.
-import { Button } from "../components/ui/button";
+
+import { Button } from "../components/ui/button"; // Importa o componente <Button> que renderiza botões customizados com estilos pré-definidos.
+// Importa os componentes relacionados ao diálogo (modal) para construir interfaces interativas.
+// Dialog: Componente contêiner que gerencia a exibição do diálogo.
+// DialogContent: Define o conteúdo principal que será exibido dentro do diálogo.
+// DialogDescription: Fornece uma descrição adicional dentro do diálogo, geralmente usada para instruções ou informações complementares.
+// DialogHeader: Estrutura o cabeçalho do diálogo, onde podem ser inseridos título e descrição.
+// DialogTitle: Exibe o título do diálogo.
+// DialogTrigger: Componente que, ao ser acionado, dispara a abertura do diálogo.
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 import { Creditos } from "@/components/Creditos"; // Importa o componente <Creditos> da criação do projeto.
@@ -44,8 +51,8 @@ export default function Inicio() {
                     justify-center: Centraliza os itens tanto horizontalmente quanto verticalmente dentro do componente, funcionando exclusivamente no display flex
                     xxs:text-lg: Em telas maiores que 390px, ajusta o tamanho do texto para "lg".
                     xl:text-xl: Em telas maiores que 1536px, ajusta o tamanho do texto para "xl".
-                    mx-5: Define a margem horizontal de 5 para cada lado, proporcionando espaçamento relativo ao tamanho da tela.
-                    my-3: Define a margem vertical de 3 para cada lado, proporcionando espaçamento relativo ao tamanho da tela.
+                    mx-5: Define a margem horizontal de 5 para cada lado.
+                    my-3: Define a margem vertical de 3 para cada lado.
                 */}
                 <nav className="flex justify-end xxs:text-lg xl:text-xl mx-5 my-3">
                     {/* Link que direciona para a página de login */}
@@ -61,7 +68,7 @@ export default function Inicio() {
                     grid: Define o container como um display grid, permitindo organizar os elementos filhos em linhas e colunas.
                     gap-8: Define um espaçamento de 8px entre os itens da grade.
                     sm:gap-14: A partir de telas de 640px, o espaçamento entre os itens aumenta para gap de 14px.
-                    mx-[6.8vw]: Define a margem horizontal de 6.8vw para cada lado, proporcionando espaçamento relativo ao tamanho da tela.
+                    mx-[6.8vw]: Define a margem horizontal de 6.8vw para cada lado.
                     xs:mx-[14.2vw]: Em telas maiores de 450px, a margem horizontal aumenta para 14.2vw, garantindo um espaçamento maior.
                     lg:mx-0: Em telas maiores que 1024px, a margem horizontal é removida, fazendo com que o container ocupe toda a largura disponível.
                     lg:mb-[10vw]: Em telas maiores que 1024px adiciona uma margem inferior de 10vw da largura, para criar um espaçamento extra abaixo do container.
@@ -82,6 +89,7 @@ export default function Inicio() {
                         */}
                         <div className="text-center lg:text-start text-gray-900">
                             {/*
+                                <h1>: Título com tamanho de fonte responsivo e alinhamento ajustado conforme a tela.
                                 font-semibold: Muda a fonte do componente para uma fonte mais para o lado do negrito.
                                 text-[8.9vw]: Define o tamanho padrão do texto como 8.9vw.
                                 xxs:text-[10vw]: Em telas maiores que 390px, ajusta o tamanho do texto para 10vw.
@@ -93,6 +101,7 @@ export default function Inicio() {
                                 Explore o universo de Rick and Morty!
                             </h1>
                             {/*
+                                <p>: Parágrafo com tamanho de fonte e alinhamento responsivos.
                                 xxs:text-lg: Em telas maiores que 390px, define o tamanho do texto como "lg".
                                 xs:text-xl: Em telas maiores que 450px, define o tamanho do texto como "xl".
                                 sm:text-[2.7vw]: Em telas maiores que 640px, o tamanho do texto é ajustado para 2.7vw.
@@ -122,17 +131,17 @@ export default function Inicio() {
                                 <DialogTrigger className="hover:-mt-1 hover:mb-1 transition-all" asChild>
                                     <div>
                                         {/*
-                                        size={"xl"}: Define o tamanho do botão como extra grande.
-                                        xxs:text-lg: Em telas maiores que 390px, define o tamanho do texto como "lg".
-                                        text-lg: Define o tamanho padrão do texto como "lg".
-                                        sm:text-xl: Em telas pequenas maiores que 640px, aumenta o tamanho do texto para "xl".
-                                        xl:text-xl: Em telas maiores que 1536px, mantém o tamanho do texto como "xl".
-                                        sm:h-12: Em telas em telas maiores que 640px, define a altura do botão como 12.
-                                        lg:h-10: Em telas maiores que 1024px, ajusta a altura do botão para 10.
-                                        sm:px-16: Em telas em telas maiores que 640px, define um padding horizontal de 16.
-                                        xl:h-12: Em telas maiores que 1536px, define a altura do botão como 12.
-                                        xl:px-18: Em telas maiores que 1536px, define um padding horizontal de 18.
-                                        shadow-xl: Adiciona uma sombra grande ao botão, dando um efeito de profundidade.
+                                            size={"xl"}: Define o tamanho do botão como extra grande.
+                                            xxs:text-lg: Em telas maiores que 390px, define o tamanho do texto como "lg".
+                                            text-lg: Define o tamanho padrão do texto como "lg".
+                                            sm:text-xl: Em telas pequenas maiores que 640px, aumenta o tamanho do texto para "xl".
+                                            xl:text-xl: Em telas maiores que 1536px, mantém o tamanho do texto como "xl".
+                                            sm:h-12: Em telas em telas maiores que 640px, define a altura do botão como 12.
+                                            lg:h-10: Em telas maiores que 1024px, ajusta a altura do botão para 10.
+                                            sm:px-16: Em telas em telas maiores que 640px, define um padding horizontal de 16.
+                                            xl:h-12: Em telas maiores que 1536px, define a altura do botão como 12.
+                                            xl:px-18: Em telas maiores que 1536px, define um padding horizontal de 18.
+                                            shadow-xl: Adiciona uma sombra grande ao botão, dando um efeito de profundidade.
                                         */}
                                         <Button 
                                             size={"xl"} 

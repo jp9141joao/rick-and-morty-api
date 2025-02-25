@@ -8,7 +8,7 @@ export const Creditos = () => {
                 Criado por 
                 
                 {/* A tag <a> é utilizada para redirecionar o usuario para o link definido no href */}
-                <a className="underline" href={"https://www.linkedin.com/in/joaopedrorosadepaula/"}>
+                <a className="underline ml-1" href={"https://www.linkedin.com/in/joaopedrorosadepaula/"}>
                     ©João Pedro R. de Paula
                 </a>
             </p>

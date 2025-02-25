@@ -15,7 +15,9 @@ export type Usuario = {
 export type Personagem = {
     id: string, 
     nome: string,
-    status: string
+    status: string,
+    especie: string,
+    genero: string,
     localizacao: string,
     imagem: string
 }

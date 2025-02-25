@@ -29,9 +29,9 @@ const loaderVariants = cva('animate-spin text-white', {
   variants: {
     // Define os tamanhos possíveis para o spinner.
     size: {
-      small: 'size-6',   // Tamanho pequeno para o spinner que terá um size de 6px.
-      medium: 'size-8',  // Tamanho médio para o spinner que terá um size de 8px.
-      large: 'size-12',  // Tamanho grande para o spinner que terá um size de 12px.
+      small: 'size-6',   // Tamanho pequeno para o spinner que terá um size de 6.
+      medium: 'size-8',  // Tamanho médio para o spinner que terá um size de 8.
+      large: 'size-12',  // Tamanho grande para o spinner que terá um size de 12.
     },
   },
   defaultVariants: {
@@ -42,8 +42,8 @@ const loaderVariants = cva('animate-spin text-white', {
 
 // <SpinnerContentProps> define as propriedades que o componente Spinner pode receber.
 interface SpinnerContentProps
-  extends VariantProps<typeof spinnerVariants>,   // Variantes do spinner de visibilidade.
-    VariantProps<typeof loaderVariants> {        // Variantes do loader detamanho.
+  extends VariantProps<typeof spinnerVariants>, // Variantes do spinner de visibilidade.
+    VariantProps<typeof loaderVariants> { // Variantes do loader detamanho.
       className?: string;   // Permite passar classes adicionais para o componente.
       children?: React.ReactNode;  // Permite passar filhos para o componente, como texto ou outros elementos.
 }

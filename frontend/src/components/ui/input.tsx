@@ -78,17 +78,17 @@ const InputSenha = React.forwardRef<HTMLInputElement, InputProps>(
           items-center: Alinha os itens verticalmente ao centro.
           text-[#bfbfbf]: Define a cor do texto como um tom de cinza claro.
           hover:text-[#707070]: Ao passar o mouse sobre o elemento, a cor do texto muda para um tom de cinza mais escuro.
-          h-10: Define a altura do elemento como 40px (10 * 4px).
+          h-10: Define a altura do elemento de 10.
           border: Adiciona uma borda ao redor do elemento.
           rounded-r-md: Arredonda os cantos da direita com um raio médio.
           rounded-l-none: Remove qualquer arredondamento nos cantos da esquerda.
-          border-t-2: Define a espessura da borda superior como 2px.
-          border-b-2: Define a espessura da borda inferior como 2px.
-          border-r-2: Define a espessura da borda direita como 2px.
-          border-l-1: Define a espessura da borda esquerda como 1px.
+          border-t-2: Define a espessura da borda superior como 2.
+          border-b-2: Define a espessura da borda inferior como 2.
+          border-r-2: Define a espessura da borda direita como 2.
+          border-l-1: Define a espessura da borda esquerda como 1.
           border-[#bfbfbf]: Define a cor da borda como um tom de cinza claro.
           hover:border-[#707070]: Ao passar o mouse sobre o elemento, a cor da borda muda para um tom de cinza escuro.
-          hover:border-r-2: Ao passar o mouse sobre o elemento, a borda direita recebe uma espessura de 2px.
+          hover:border-r-2: Ao passar o mouse sobre o elemento, a borda direita recebe uma espessura de 2.
         */}
         <div
           className={cn(
@@ -100,15 +100,18 @@ const InputSenha = React.forwardRef<HTMLInputElement, InputProps>(
         >
           {/* 
             Renderiza um ícone condicional:
-            Se "show" for true, exibe o componente <EyeOff> indicando o olho fechado.
-            Caso contrário, exibe o componente <Eye> indicando o olho aberto.
+            Se "show" for true, exibe o componente <Eye> indicando o olho fechado.
+            Caso contrário, exibe o componente <EyeOff> indicando o olho aberto.
             Ambos os ícones recebem classes para definir seu tamanho e responsividade. 
+            w-4: Define a largura de 4 para o elemento.
+            lg:w-5: Em telas maiores que 1024px, define a largura de 5 para o elemento.
+            h-auto: Define que a altura do elemento terá a mesma algura da largura.
           */}
-          {show ? (
-            <EyeOff className="w-4 lg:w-5 h-auto xxs5:w-auto p-0" />
-          ) : (
-            <Eye className="w-4 lg:w-5 h-auto xxs5:w-auto p-0" />
-          )}
+          {
+            show ? 
+            <Eye className="w-4 lg:w-5 h-auto xxs5:w-auto p-0" /> :
+            <EyeOff className="w-4 lg:w-5 h-auto p-0" />
+          }
         </div>
       </div>
     );

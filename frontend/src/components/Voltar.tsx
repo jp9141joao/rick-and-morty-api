@@ -6,6 +6,10 @@ export function Voltar({ para }: { para: string }) {
     
     return (
         // O componente <nav> é usado para envolver links de navegação.
+        // flex: Organiza os elementos usando flexbox, oque facilita a organização e o alinhamento dos componentes.
+        // justify-start: Posiciona os itens no inicio do componente, funcionando exclusivamente no display flex
+        // mx-5: Define a margem horizontal de 5 para cada lado, proporcionando espaçamento relativo ao tamanho da tela.
+        // my-3: Define a margem vertical de 3 para cada lado, proporcionando espaçamento relativo ao tamanho da tela.
         <nav className="flex justify-start mx-5 my-3">
             {/* 
                 O componente <Link> será responsavel por redirecionar o usuario, já 

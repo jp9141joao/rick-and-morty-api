@@ -24,10 +24,10 @@ const buttonVariants = cva(
         outline:
           "rounded-md border-2 border-[#bfbfbf] bg-transparent px-3 py-1 text-sm hover:bg-gray-200 hover:border-[#707070]",
           /*
-            border-2: Aplica uma borda com largura de 2px ao elemento.
+            border-2: Aplica uma borda com largura de 2 ao elemento.
             border-[#bfbfbf]: Define a cor da borda com tom de cinza.
-            px-3: Adiciona um padding na direita e esquerda de tamanho 3px.
-            py-1: Adiciona um padding em cima e embaixo de tamanho 1px.
+            px-3: Adiciona um padding na direita e esquerda de tamanho 3.
+            py-1: Adiciona um padding em cima e embaixo de tamanho 1.
             hover:bg-gray-200: Ao passar o mouse sobre o elemento, o fundo muda para tom um cinza claro.
             hover:border-[#707070]: Ao passar o mouse, a cor da borda muda para um tom de cinza escuro.
           */
@@ -43,7 +43,7 @@ const buttonVariants = cva(
         xl: "h-10 rounded-md px-12",
         /*
           xl: define um novo tamanho ao botão
-          px-12: Adiciona um padding na direita e esquerda de tamanho 12px.
+          px-12: Adiciona um padding na direita e esquerda de tamanho 12.
         */
         icon: "h-9 w-9",
       },
