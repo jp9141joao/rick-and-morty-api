@@ -129,11 +129,12 @@ export const criarConta = async (req: Request, res: Response): Promise<void> => 
             return;
         }
 
+        const nomeFormatado = nome.toLowerCase().split(" ").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
         const senhaCriptografada = await bcrypt.hash(senha, 10);
         
         await prisma.tb_usuario.create({
             data: {
-                nome: nome,
+                nome: nomeFormatado,
                 email: email,
                 senha: senhaCriptografada
             }

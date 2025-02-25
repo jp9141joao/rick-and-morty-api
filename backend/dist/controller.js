@@ -111,10 +111,11 @@ const criarConta = async (req, res) => {
             res.status(200).json(http_result_1.HttpResult.Fail("Erro: E-mail Já Cadastrado!"));
             return;
         }
+        const nomeFormatado = nome.toLowerCase().split(" ").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
         const senhaCriptografada = await bcryptjs_1.default.hash(senha, 10);
         await prisma.tb_usuario.create({
             data: {
-                nome: nome,
+                nome: nomeFormatado,
                 email: email,
                 senha: senhaCriptografada
             }
