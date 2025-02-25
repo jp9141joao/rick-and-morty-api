@@ -297,7 +297,7 @@ export default function Central() {
     // Função para carregar os dados do usuário a partir do backend.
     const carregarUsuario = async () => {
         try {
-            // Cha,a a função getUsuario que retorna as informações do usuario por meio do token JWT.
+            // Chama a função getUsuario que retorna as informações do usuario por meio do token JWT.
             const response = await getUsuario();
 
             // Se a requisição for bem sucedida:
