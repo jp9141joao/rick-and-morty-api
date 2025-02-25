@@ -1,7 +1,7 @@
 import { Info, Login, Usuario } from "@/types/types";  // Importa os tipos de Login, Usuario e Info.
 import axios from 'axios';  // Importa o axios para fazer requisições HTTP.
 
-const url = 'http://localhost:3000';  // Define a URL do servidor de backend que vai receber as requisições.
+const url = 'https://rick-and-morty-api-back-end.onrender.com';  // Define a URL do servidor de backend que vai receber as requisições.
 
 // Função para autenticar o usuário e retornar o token JWT.
 export const autentica = async (login: Login) => {
