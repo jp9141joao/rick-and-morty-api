@@ -7,14 +7,14 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const routes_1 = require("./routes");
 const app = (0, express_1.default)();
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.use((0, cors_1.default)({
-    origin: 'http://localhost:5173',
+    origin: 'https://rick-and-morty-api-back-end.onrender.com',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express_1.default.json());
 app.use(routes_1.routes);
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running on port ${port}`);
 });
