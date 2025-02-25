@@ -331,13 +331,13 @@ export default function Central() {
             // Se a response for bem sucessidade o length dos results será maior que um, caso contrário 
             // a requisição não deu certo.
             if (response.results.length > 0) {
-
                 // Desmenbramento do valor retornando para o tratamento dos dados por meio do map
                 // que irá percorrer todo o vetor da response e irá converter os dados e armazenalos nas propriedades
                 // correspondentes
                 let dadosPersonagens: Personagem[] = response.results.map((personagem: any) => {
                     // Define o genero da silaba.
                     const g: string = personagem.gender == "Female" ? "a" : "o";
+
                     return {
                         id: personagem.id,
                         nome: personagem.name,
@@ -348,7 +348,7 @@ export default function Central() {
                             personagem.status == "Dead" ? `Mort${g}` :
                             // Retorna desconhecido caso seja Unkown
                             "Desconhecido",
-                        especie: personagem.especies == "Unknown" ? "Desconhecido" : personagem.especies,
+                        especie: personagem.species == "Unknown" ? "Desconhecido" : personagem.species,
                         genero:
                             // Caso traduz os genero para Masculino ou Feminino.
                             personagem.gender == "Female" ? "Feminino" :
@@ -711,11 +711,15 @@ export default function Central() {
                                                 </p>
                                             </CardDescription>
                                         </CardHeader>
-                                        <CardContent className="relative">
+                                        <CardContent className="relative bg-gradient-to-tr from-[#1a9f9a] to-[#b6c937] rounded-lg">
                                             <div>
                                                 <img className="rounded-lg" src={personagem.imagem} />
                                             </div>
-                                            
+                                            <div className="rounded-lg text-center">
+                                                <p className="text-xl lg:text-lg text-white font-semibold lg:my-1 lg:leading-[1.1]">
+                                                    { personagem.especie }
+                                                </p>
+                                            </div>
                                             <div
                                                 className={`${
                                                     ["Vivo", "Viva"].includes(personagem.status) ? "bg-green-600" : 
