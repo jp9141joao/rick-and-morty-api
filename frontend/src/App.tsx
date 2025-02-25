@@ -13,7 +13,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='*' element={ <PaginaNaoEncontrada /> } />
-        <Route path="/" element={ <Navigate to={'/central'} /> } />
+        <Route path="/" element={ <Navigate to={'/inicio'} /> } />
         <Route path="/inicio" element={ <Inicio/> } />
         <Route path="/entrar" element={ <Entrar /> } />
         <Route path="/cadastrar" element={ <Cadastrar /> } />
