@@ -591,6 +591,8 @@ export default function Central() {
                                                 <InputSenha
                                                     // Adiciona um ID para o elemente como referencia para o Label.
                                                     id="senha"
+                                                    // Define um placeholder diferente do padrão
+                                                    placeholder="Sua senha"
                                                     // Define que o input terá o mesmo valor da constante senha.
                                                     value={senha}
                                                     // Ao escrever no input ele atualiza o valor da constante senha.
@@ -615,7 +617,7 @@ export default function Central() {
                                                     // Adiciona um ID para o elemente como referencia para o Label.
                                                     id="nova-senha"
                                                     // Define um placeholder diferente do padrão
-                                                    placeholder="Cba321$"
+                                                    placeholder="Sua nova senha"
                                                     // Define que o input terá o mesmo valor da constante novaSenha.
                                                     value={novaSenha}
                                                     // Ao escrever no input ele atualiza o valor da constante novaSenha.
