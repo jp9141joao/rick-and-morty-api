@@ -54,7 +54,7 @@ InputIntegrado.displayName = "InputIntegrado";
 const InputSenha = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {
     // Cria um estado "show" para controlar se a senha será exibida ou ocultada.
-    const [show, setShow] = React.useState<boolean>(false);
+    const [show, setShow] = React.useState<boolean>(true);
 
     return (
       // Integra o componente <InputIntegrado> ao Button, o design de cada um está ajustado para parecer que ambos 

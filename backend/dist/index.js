@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express")); // Importa o Express para
 const cors_1 = __importDefault(require("cors")); // Importa o middleware CORS para controlar quem pode acessar a API.
 const routes_1 = require("./routes"); // Importa as rotas definidas em outro arquivo.
 const app = (0, express_1.default)(); // Cria uma instancia do Express.
-const port = process.env.PORT || 3000; // Define a porta do servidor caso ela nao exista define por padrao a 3000.
+const porta = process.env.PORT || 3000; // Define a porta do servidor caso ela nao exista define por padrao a 3000.
 // Lista de origens permitidas para acessar a API.
 const allowedOrigins = [
     'https://rick-and-morty-api-jp9141joao.netlify.app',
@@ -31,6 +31,6 @@ app.use((0, cors_1.default)({
 app.use(express_1.default.json()); // Faz o Express entender o JSON enviado no corpo das requisições.
 app.use(routes_1.routes); // Usa as rotas importadas para responder às requisições.
 // Inicia o servidor na porta definida e exibe uma mensagem no console.
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+app.listen(porta, () => {
+    console.log(`Server running on port ${porta}`);
 });
