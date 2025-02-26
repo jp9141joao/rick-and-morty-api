@@ -4,7 +4,6 @@
 // <PaginaMeioUmaColuna>: Possui as mesmas propriedades do componente <PaginaMeio>, porém sempre com uma única coluna independente do tamanho da tela.
 // <PaginaRodape>: Define o componente que representa o rodapé da página.
 import { PaginaCorpo, PaginaRodape, PaginaMeioUmaColuna, PaginaTopo } from "../components/PageLayout/LayoutPagina";
-import { Creditos } from "@/components/Creditos"; // Importa o componente <Creditos> da criação do projeto.
 import { Check, ChevronDown, Menu, MoveRight } from "lucide-react"; // Importa ícones do "lucide-react", utilizados para exibir ícones na interface.
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"; // Importa os componentes do dropdown menu, que fornecem uma interface interativa para exibir opções em um menu suspenso.
 import { useEffect, useState } from "react"; 
@@ -58,8 +57,10 @@ export default function Central() {
     const [itemSelecionado, setItemSelecionado] = useState<string>('Filtro');
     // useState para armazenar o número da página atual na listagem dos personagens.
     const [numeroPagina, setNumeroPagina] = useState<number>(1);
-    // useState para armazenar os dados de navegação (página anterior e próxima) na API.
+    // useState para armazenar o estado de aberto ou fechado do dropdown.
     const [navegacao, setNavegacao] = useState<Navegacao>({ voltar: null, proximo: '' });
+    // 
+    const [abrirDropdown, setAbrirDropdown] = useState<boolean>(false);
     // Array de strings que define as opções do menu de filtro.
     const dadosMenu: string[] = ['Nome', 'Status', 'Especie', 'Genero', 'Localizacao'];
     // Define a URL da API dos personagens, incorporando o número da página atual.
@@ -728,16 +729,26 @@ export default function Central() {
                             placeholder={filtro.por == "Filtro" ? "Selecione uma categoria pro filtro" : `Filtrar personagem`}
                             // w-full: O componente vai preencher 100% da largura do componente pai.
                             className="w-full"
-                            // Atribui o valor da propriedade por do objeto filtro no input mostrando o valor escrito pelo usuario.
-                            value={filtro.valor}
-                            // Caso o usuario nao tenha selecionado nenhum filtro, ele desabilita o input para nao ocorrer erros.
-                            disabled={filtro.por == "Filtro" ? true : false}
+                            // Caso o filtro esteja selecionado, ele atribui o valor da propriedade por do objeto filtro no 
+                            // input mostrando o valor escrito pelo usuario caso contrario nao deixa o usuario escrever.
+                            value={filtro.por == "Filtro" ? '' : filtro.valor}
                             // Caso o usuario escreva no input ele ira atribuir o valor escrito para a propriedade por do objeto filtro.
                             onChange={(e) => setFiltro(
                                 { ...filtro, valor: e.target.value }
                             )}
+                            // Caso o filtro nao esteja selecionado e o usuario clique no input ele ira abrir o dropdown para selecionar o filtro.
+                            onClick={() => {
+                                filtro.por == "Filtro" ? 
+                                setAbrirDropdown(true) : null
+                            }}
                         />
-                        <DropdownMenu>
+                        <DropdownMenu
+                            // O estado de aberto ou fechado sera o mesmo que o da constante.
+                            open={abrirDropdown} 
+                            // Configura o abrir e fechar do botao.
+                            onOpenChange={(open) => setAbrirDropdown(open)}
+
+                        >
                             { /* asChild: Permite que o primeiro filho dentro dele assuma o comportamento do trigger. */}
                             <DropdownMenuTrigger asChild>
                                 {/*
@@ -828,11 +839,10 @@ export default function Central() {
                                     /* 
                                         Se a condição for verdadeira, renderiza um Card com os dados do personagem.
                                         key: Define uma key para cada personagem que sera igual ao id deles.
-                                        hover:-mt-3: Quando o usuário passa o mouse sobre o elemento, ele se move 3 para cima.
-                                        hover:mb-3: Quando o usuário passa o mouse sobre o elemento, ele adiciona uma margem inferior de 3, para compensar o movimento do -mt-3.
+                                        hover:mb-3: Quando o usuário passa o mouse sobre o elemento, ele se move para baixo.
                                         transition-all: Aplica uma transição suave para todas as propriedades animáveis, garantindo que os efeitos de hover aconteçam de forma fluida.
                                     */
-                                    <Card key={personagem.id} className="hover:-mt-3 hover:mb-3 transition-all">
+                                    <Card key={personagem.id} className="hover:translate-y-3 transition-all">
                                         <CardHeader>
                                             <CardTitle>
                                                 {personagem.nome}
@@ -1025,8 +1035,7 @@ export default function Central() {
                         </PaginationItem>
                     </PaginationContent>
                 </Pagination>
-                {/* <Creditos>: Componente que exibe os créditos do projeto. */}
-                <Creditos />
+
             </PaginaRodape>
         </PaginaCorpo>
     )

@@ -23,8 +23,9 @@ export const PaginaCorpo = ({ children }: { children: React.ReactNode }) => {
         // flex: Organiza os elementos usando flexbox, oque facilita a organização e o alinhamento dos componentes.
         // min-h-screen: Garante que o conteúdo ocupe pelo menos toda a altura da tela, facilitando a implementação da <navbar>e do <footer>.
         // flex-col: Organiza os elementos em uma coluna.
-        <div className="flex  flex-col"
-        style={{ height: `calc(var(--vh,1vh)*98)` }}
+        <div 
+            className="flex flex-col"
+            style={{ height: `calc(var(--vh,1vh)*100)` }}
         >
             {/* Renderiza os elementos filhos passados para o componente */}
             { children }

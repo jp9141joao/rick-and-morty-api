@@ -123,12 +123,11 @@ export default function Inicio() {
                             <Dialog>
                                 {/* 
                                     DialogTrigger envolve o botão e define a interação para abrir o diálogo 
-                                    hover:-mt-1: Quando o usuário passa o mouse sobre o elemento, ele se move 1 para cima.
-                                    hover:mb-1: Quando o usuário passa o mouse sobre o elemento, ele adiciona uma margem inferior de 1, para compensar o movimento do -mt-1.
+                                    hover:mb-1: Quando o usuário passa o mouse sobre o elemento, ele se move um pouco para cima.
                                     transition-all: Aplica uma transição suave para todas as propriedades animáveis, garantindo que os efeitos de hover aconteçam de forma fluida.
                                     asChild: Faz com que o DialogTrigger repasse suas propriedades ao primeiro filho direto, permitindo que qualquer elemento seja usado como gatilho do diálogo. 
                                 */}
-                                <DialogTrigger className="hover:-mt-1 hover:mb-1 transition-all" asChild>
+                                <DialogTrigger className="hover:-translate-y-1 transition-all" asChild>
                                     <div>
                                         {/*
                                             size={"xl"}: Define o tamanho do botão como extra grande.

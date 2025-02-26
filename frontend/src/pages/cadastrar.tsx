@@ -63,14 +63,16 @@ export default function Cadastrar() {
                     variant: 'destructive',
                     title: 'Nome Completo não Informado',
                     description: 'Nome Completo não foi informado. Forneça um nome completo para continuar.',
-                });                    
+                });
+                return;             
             } else if (email == "") {
                 setAvisoInput("Email");
                 toast({
                     variant: 'destructive',
                     title: 'E-mail não Informado',
                     description: 'E-mail não foi informado. Forneça um e-mail para continuar.',
-                }); 
+                });
+                return;
             } else if (senha == "") {
                 setAvisoInput("Senha");
                 toast({
@@ -78,6 +80,7 @@ export default function Cadastrar() {
                     title: 'Senha não Informada',
                     description: 'Senha não foi informada. Forneça uma senha para continuar.',
                 });
+                return;
             }
 
             // Chama a função de cadastro passando nome, email e senha.

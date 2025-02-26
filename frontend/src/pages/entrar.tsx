@@ -56,6 +56,7 @@ export default function Entrar() {
                     title: 'E-mail não Informado',
                     description: 'E-mail não foi informado. Forneça um e-mail para continuar.',
                 }); 
+                return;
             } else if (senha == "") {
                 setAvisoInput("Senha");
                 toast({
@@ -63,6 +64,7 @@ export default function Entrar() {
                     title: 'Senha não Informada',
                     description: 'Senha não foi informada. Forneça uma senha para continuar.',
                 });
+                return;
             }
 
             // Chama a função de autenticação passando email e senha.
@@ -207,10 +209,10 @@ export default function Entrar() {
                                 text-[8.9vw]: Define o tamanho padrão do texto como 8.9vw.
                                 xxs:text-[10vw]: Em telas maiores que 390px, ajusta o tamanho do texto para 10vw.
                                 xs:text-[7.3vw]: Em telas maiores que 450px, ajusta o tamanho do texto para 7.3vw.
-                                lg:text-[4.5vw]: Em telas maiores que 1024px, ajusta o tamanho do texto para 4.5vw.
+                                lg:text-[4.1vw]: Em telas maiores que 1024px, ajusta o tamanho do texto para 4.1vw.
                                 leading-[1.2]: Define a altura da linha como 1.2, garantindo um espaçamento adequado entre as linhas.
                             */}
-                            <h1 className="font-semibold text-[8.9vw] xxs:text-[10vw] xs:text-[7.3vw] lg:text-[4.5vw] leading-[1.2]">
+                            <h1 className="font-semibold text-[8.9vw] xxs:text-[10vw] xs:text-[7.3vw] lg:text-[4.1vw] leading-[1.2]">
                                 Seja bem-vindo!
                             </h1>
                             {/*
@@ -218,12 +220,13 @@ export default function Entrar() {
                                 xxs:text-lg: Em telas maiores que 390px, define o tamanho do texto como "lg".
                                 xs:text-xl: Em telas maiores que 450px, define o tamanho do texto como "xl".
                                 sm:text-[2.7vw]: Em telas maiores que 640px, o tamanho do texto é ajustado para 2.7vw.
-                                lg:text-xl: Em telas maiores que 1024px, o tamanho do texto volta a ser "xl".
+                                lg:text-base: Em telas maiores que 1024px, o tamanho do texto passa a ser o padrao.
                                 xl:text-[1.8vw]: Em telas maiores que 1536px, o tamanho do texto é ajustado para 1.8vw.
                                 xl:leading-[1.2]: Em telas maiores que 1536px, define a altura da linha como 1.2, garantindo um espaçamento adequado entre as linhas.
                                 mt-2: Adiciona uma margem superior de 2, criando um pequeno espaçamento acima do parágrafo.
+                                mt-2: Em telas maiores que 1024px, adiciona uma margem superior de 2, criando um pequeno espaçamento acima do parágrafo.
                             */}
-                            <p className="xxs:text-lg xs:text-xl sm:text-[2.7vw] lg:text-xl xl:text-[1.3vw] xl:leading-[1.2] mt-2">
+                            <p className="xxs:text-lg xs:text-xl sm:text-[2.7vw] lg:text-base xl:text-[1.3vw] xl:leading-[1.2] mt-2 lg:mt-1">
                                 Conecte-se para utilizar nossa ferramenta.
                             </p>
                         </div>
