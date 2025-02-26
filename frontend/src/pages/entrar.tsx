@@ -47,6 +47,24 @@ export default function Entrar() {
             // Ativa o indicador de carregamento.
             setCarregando(true);
 
+            // Verifica se o valor de email e senha e vazio, e retorna o erro para o usuario caso seja
+            // por meio do toast, e indica o local do erro formatando a borda do input em vermelho.
+            if (email == "") {
+                setAvisoInput("Email");
+                toast({
+                    variant: 'destructive',
+                    title: 'E-mail não Informado',
+                    description: 'E-mail não foi informado. Forneça um e-mail para continuar.',
+                }); 
+            } else if (senha == "") {
+                setAvisoInput("Senha");
+                toast({
+                    variant: 'destructive',
+                    title: 'Senha não Informada',
+                    description: 'Senha não foi informada. Forneça uma senha para continuar.',
+                });
+            }
+
             // Chama a função de autenticação passando email e senha.
             const response = await autentica({ email, senha } as Login);
 
@@ -218,7 +236,7 @@ export default function Entrar() {
                         <div className="w-full grid gap-2">
                             {/* Campo de Email */}
                             <div>
-                                {/* htmlFor: Referncia o elemento que tenha o mesmo id que na propriedade. */}
+                                {/* htmlFor: Referencia o elemento que tenha o mesmo id que na propriedade. */}
                                 <Label htmlFor="email">
                                     Email
                                 </Label>
@@ -239,7 +257,7 @@ export default function Entrar() {
                             </div>
                             {/* Campo de Senha */}
                             <div>
-                                {/* htmlFor: Referncia o elemento que tenha o mesmo id que na propriedade. */}
+                                {/* htmlFor: Referencia o elemento que tenha o mesmo id que na propriedade. */}
                                 <Label htmlFor="senha">
                                     Senha
                                 </Label>
@@ -252,7 +270,7 @@ export default function Entrar() {
                                     onChange={(e) => setSenha(e.target.value)}
                                     // Se avisoInput indicar erro em "Senha" ou "Email-Senha", adiciona borda vermelha.
                                     className={["Senha", "Email-Senha"].includes(avisoInput) ? "border-red-500" : ""}
-                                    // Ao clickar no input caso ele tenha a bordar vermelha ira resertar para a borda padrão
+                                    // Ao clickar no input caso ele tenha a bordar vermelha ira resertar para a borda padrão.
                                     onClick={() => setAvisoInput("")}
                                 />
                             </div>

@@ -500,18 +500,26 @@ export default function Central() {
                                             null
                                         }
                                     </SheetTitle>
-                                </SheetHeader>  
+                                </SheetHeader>
                                 {/* 
                                     <div>: Define o conteúdo do menu.
                                     grid: Define o container como um display grid, permitindo organizar os elementos filhos em linhas e colunas.
                                     gap-2: Define um espaçamento de 2 entre os itens da grade.
-                                    mt-3: Adiciona margem superior de 3.
+                                    mt-3: Adiciona uma margem superior de 3.
                                 */}
                                 <div className="grid gap-2 mt-3">
                                     
                                     {
+                                        // Renderiza o Menu 
                                         conteudo == "Menu" ?
                                         <>
+                                            {/*
+                                                Ao clicar no em um dos item na sidebar, onClick sera ativado e ira renderizar
+                                                o conteudo corresponte ao item.
+                                                text-lg: Define o tamanho do texto como "lg".
+                                                hover:-translate-y-1: Quando o usuário passa o mouse sobre o elemento, ele move o valor de 1 para cima.
+                                                transition-all: Aplica uma transição suave para todas as propriedades animáveis, garantindo que os efeitos de hover aconteçam de forma fluida.
+                                            */}
                                             <div onClick={() => setConteudo("Mudar-Dados")}>
                                                 <p className="text-lg hover:-translate-y-1 transition-all">
                                                     Alterar Informações
@@ -522,79 +530,142 @@ export default function Central() {
                                                     Alterar Senha
                                                 </p>
                                             </div>
+                                            {/*
+                                                flex: Utiliza o layout flexível para alinhar os itens.     
+                                                gap-1: Define um espaçamento de 1 entre os itens da grade.
+                                                hover:translate-x-2: Quando o usuário passa o mouse sobre o elemento, ele move o valor de 2 para a direita.
+                                                transition-all: Aplica uma transição suave para todas as propriedades animáveis, garantindo que os efeitos de hover aconteçam de forma fluida.
+                                                onClick: Ao clicar no elemento ele chama a funcao handleSair e realiza o logout do usuario.
+                                            */}
                                             <div className="flex gap-1 hover:translate-x-2 transition-all" onClick={handleSair}>
+                                                {/* text-lg: Define o tamanho do texto como "lg". */}
                                                 <p className="text-lg">
                                                     <strong>
                                                         Sair
                                                     </strong>
                                                 </p>
+                                                {/* mt-1: Adiciona uma margem superior de 1 para alinhar com o texto. */}
                                                 <MoveRight className="mt-1"/>              
                                             </div>
                                         </> :
+                                        //Opção para renderizar a sessao de alterar senha.
                                         conteudo == "Mudar-Senha" ?
                                         <>
+                                            {/*
+                                                grid: Define o container como um display grid, permitindo organizar os elementos filhos em linhas e colunas. 
+                                                items-center: Alinha os itens no centro ao longo do eixo da linha, reforçando a centralização.  
+                                                gap-1: Define um espaçamento de 1 entre os itens da grade.
+                                            */}
                                             <div className="grid items-center gap-1">
+                                                {/* htmlFor: Referencia o elemento que tenha o mesmo id que na propriedade. */}
                                                 <Label htmlFor="senha">
                                                     Senha
                                                 </Label>
                                                 <InputSenha
+                                                    // Adiciona um ID para o elemente como referencia para o Label.
                                                     id="senha"
+                                                    // Define que o input terá o mesmo valor da constante senha.
                                                     value={senha}
+                                                    // Ao escrever no input ele atualiza o valor da constante senha.
                                                     onChange={(e) => setSenha(e.target.value)}
+                                                    // Se avisoInput indicar erro em "Senha", adiciona borda vermelha.
                                                     className={avisoInput == "Senha" ? "border-red-500" : ""}
+                                                    // Ao clickar no input caso ele tenha a bordar vermelha ira resertar para a borda padrão.
                                                     onClick={() => setAvisoInput("")}
                                                 />
                                             </div>
+                                            {/*
+                                                grid: Define o container como um display grid, permitindo organizar os elementos filhos em linhas e colunas. 
+                                                items-center: Alinha os itens no centro ao longo do eixo da linha, reforçando a centralização.  
+                                                gap-1: Define um espaçamento de 1 entre os itens da grade.
+                                            */}
                                             <div className="grid items-center gap-1">
+                                                {/* htmlFor: Referencia o elemento que tenha o mesmo id que na propriedade. */}
                                                 <Label htmlFor="nova-senha">
                                                     Nova Senha
                                                 </Label>
                                                 <InputSenha
+                                                    // Adiciona um ID para o elemente como referencia para o Label.
                                                     id="nova-senha"
+                                                    // Define que o input terá o mesmo valor da constante novaSenha.
                                                     value={novaSenha}
+                                                    // Ao escrever no input ele atualiza o valor da constante novaSenha.
                                                     onChange={(e) => setNovaSenha(e.target.value)}
+                                                    // Se avisoInput indicar erro em "Nova-Senha", adiciona borda vermelha.
                                                     className={avisoInput == "Nova-Senha" ? "border-red-500" : ""}
+                                                    // Ao clickar no input caso ele tenha a bordar vermelha ira resertar para a borda padrão.
                                                     onClick={() => setAvisoInput("")}
                                                 />
                                             </div>
                                         </> :
+                                        //Opção para renderizar a sessao de alterar os dados (info).
                                         conteudo == "Mudar-Dados" ?
                                         <>
                                             <div>
+                                                {/* htmlFor: Referencia o elemento que tenha o mesmo id que na propriedade. */}
                                                 <Label htmlFor="nome">
                                                     Nome Completo
                                                 </Label>
                                                 <Input
+                                                    // Adiciona um ID para o elemente como referencia para o Label.
                                                     id="nome"
+                                                    // Define um texto para ser preenchido quando o <input> estiver vazio.
                                                     placeholder="Seu nome completo"
+                                                    // Define que o input terá o mesmo valor da constante nome.
                                                     value={nome}
+                                                    // Ao escrever no input ele atualiza o valor da constante nome.
                                                     onChange={(e) => setNome(e.target.value)}
+                                                    // Se avisoInput indicar erro em "Nome", adiciona borda vermelha.
                                                     className={avisoInput == "Nome" ? "border-red-500" : ""}
+                                                    // Ao clickar no input caso ele tenha a bordar vermelha ira resertar para a borda padrão.
                                                     onClick={() => setAvisoInput("")}
                                                 />
                                             </div>
                                             <div>
+                                                {/* htmlFor: Referencia o elemento que tenha o mesmo id que na propriedade. */}
                                                 <Label htmlFor="email">
                                                     Email
                                                 </Label>
                                                 <Input
+                                                    // Adiciona um ID para o elemente como referencia para o Label.
                                                     id="email"
+                                                    // Define um texto para ser preenchido quando o <input> estiver vazio.
                                                     placeholder="nome@exemplo.com"
+                                                    // Define que o input terá o mesmo valor da constante email.
                                                     value={email}
+                                                    // Ao escrever no input ele atualiza o valor da constante email.
                                                     onChange={(e) => setEmail(e.target.value)}
+                                                    // Se avisoInput indicar erro em "Email", adiciona borda vermelha.
                                                     className={avisoInput == "Email"  ? "border-red-500" : ""}
+                                                    // Ao clickar no input caso ele tenha a bordar vermelha ira resertar para a borda padrão.
                                                     onClick={() => setAvisoInput("")}
                                                 />
                                             </div>
-                                        </> : null
+                                        </> : null // Retorna null se conteudo nao corresponder a nenhum valor, nao renderizando nada.
                                     }
                                     
                                 </div>
                                 {
+                                    // Caso a constante conteudo seja diferente de menu e 
+                                    // conteudo seja diferente de vazios ele renderiza os botoes para a requisicao e de voltar pagina. 
                                     conteudo != "Menu" && conteudo != "" ?
+                                    /*
+                                        grid: Define o container como um display grid, permitindo organizar os elementos filhos em linhas e colunas. 
+                                        gap-2: Define um espaçamento de 2 entre os itens da grade.   
+                                        w-full: O componente vai preencher 100% da largura do componente pai.
+                                        mt-3: Adiciona uma margem superior de 3.
+                                    */
                                     <div className="grid gap-2 w-full mt-3">
+                                        {/*
+                                            w-full: O componente vai preencher 100% da largura do componente pai.
+                                            type="button": O tipo do botao devera ser button pois caso seja submit, 
+                                            alem de atualizar a pagina nao funcionaria pois todos os botoes iriam chamar o mesmo
+                                            handleSubmit, por isso e necessario a implementacao do onClick.
+                                            onClick: Caso conteudo seja "Mudar-senha" chamara a funcao handleMudarSenha caso contrario
+                                            chama a funcao handleMudarDados.
+                                        */}
                                         <Button
-                                            className="w-full bg-gradient-to-tr from-[#1a9f9a] to-[#b6c937] text-primary-foreground shadow-lg transition-all duration-300 hover:bg-gradient-to-bl hover:from-[#b6c937] hover:to-[#1a9f9a]"
+                                            className="w-full"
                                             type="button"
                                             disabled={desabilitarBtn}
                                             onClick={
@@ -604,45 +675,75 @@ export default function Central() {
                                             }
                                         >
                                             {
+                                                // Caso a constante carregando for true ele renderiza  o componente <Spinner> 
+                                                // caso contrario adiciona o valor "Alterar".
                                                 carregando ?
                                                 <Spinner /> :
                                                 "Alterar"
                                             }
                                         </Button>
                                         <Button
+                                            // Adiciona o estilo de outline ao botao, devez o default.
                                             variant={"outline"}
+                                            // w-full: O componente vai preencher 100% da largura do componente pai.
                                             className="w-full"
+                                            // type:button: pois o componente nao ira fazer nenhuma requisicao nesse parte.
                                             type="button"
+                                            // Ao clicar no componente ele ira voltar o conteudo da sidebar, atribuindo a variavel como "Menu".
                                             onClick={() => setConteudo("Menu")}
                                         >
                                             Voltar
-                                        </Button> 
-                                    </div> : null
+                                        </Button>
+                                    </div> : null // Caso contrario, nao renderiza nada.
                                 }
                                 <SheetFooter>
-                                <SheetClose asChild>
-                                    
-                                </SheetClose>
+                                    {/* asChild: Permite que o primeiro filho dentro dele assuma o comportamento do trigger. */}
+                                    <SheetClose asChild>
+                                    </SheetClose>
                                 </SheetFooter>
                             </SheetContent>
                         </Sheet>
                     </div>
                 </nav>
             </PaginaTopo>
+            {/*
+                place-items-center: Responsavel por posicionar os itens no topo da pagina exclusivamente dentro de um componente com a classe grid.
+                px-[13.3vw]: Define um padding horizontal de 13.3vw.
+                xxs:px-[14.8vw]: Em telas maiores de 390px, define  um padding horizontal de 14.8vw.
+                lg:px-[20vw]: Em telas maiores de 1024px, define  um padding horizontal de 20vw.
+            */}
             <PaginaMeioUmaColuna className="place-items-start px-[13.3vw] xxs:px-[14.8vw] lg:px-[20vw]">
+                {/* w-full: O componente vai preencher 100% da largura do componente pai. */}
                 <div className="w-full">
+                    {/*
+                        flex: Organiza os elementos usando flexbox, oque facilita a organização e o alinhamento dos componentes.
+                        gap-2: Adiciona um espaçamento de 2 entre os itens.
+                        pt-[8vw]: Define um padding superior de 8vw.
+                    */}
                     <div className="flex gap-2 pt-[8vw]">
                         <Input
+                            // Caso o filtro nao for selecionado ele define o placeholder para que o usuario saiba que deve
+                            // selecionar no dropdown algum filtro caso deseja filtrar, caso o filtro esteja selecionado ele mudar
+                            // o placeholder indicando que pode filtrar no input
                             placeholder={filtro.por == "Filtro" ? "Selecione uma categoria pro filtro" : `Filtrar personagem`}
+                            // w-full: O componente vai preencher 100% da largura do componente pai.
                             className="w-full"
+                            // Atribui o valor da propriedade por do objeto filtro no input mostrando o valor escrito pelo usuario.
                             value={filtro.valor}
+                            // Caso o usuario nao tenha selecionado nenhum filtro, ele desabilita o input para nao ocorrer erros.
                             disabled={filtro.por == "Filtro" ? true : false}
+                            // Caso o usuario escreva no input ele ira atribuir o valor escrito para a propriedade por do objeto filtro.
                             onChange={(e) => setFiltro(
                                 { ...filtro, valor: e.target.value }
                             )}
                         />
                         <DropdownMenu>
+                            { /* asChild: Permite que o primeiro filho dentro dele assuma o comportamento do trigger. */}
                             <DropdownMenuTrigger asChild>
+                                {/*
+                                    h-10: Define que a altura do botao tera o valor de 10.
+                                    ml-auto: Define que a margem esquerda do componente vai ser definida automaticamente.
+                                */}
                                 <Button className="h-10 ml-auto">
                                     <p>
                                         { itemSelecionado }
@@ -650,13 +751,22 @@ export default function Central() {
                                     <ChevronDown />
                                 </Button>
                             </DropdownMenuTrigger>
+                            {/* align:"end": Alinha o <DropdownMenuContent> para o final do componente */}
                             <DropdownMenuContent align="end">
                                 <DropdownMenuGroup>
                                     {
+                                        // Imprime o valores dos possiveis filtros como opcoes a ser
+                                        // escolhidas dentro do dropdown
                                         dadosMenu.map((item: string, index: number) => (
                                             <DropdownMenuItem
+                                                // Define uma key como o indice
                                                 key={index}
+                                                // flex: Organiza os elementos usando flexbox, oque facilita a organização e o alinhamento dos componentes.                                                
                                                 className="flex justify-end"
+                                                // Ao clicar no item se o item ja estiver selecionado, ele desmarca o item,
+                                                // E atribui o valor de filtro para vazio.
+                                                // Se ele nao estiver selecioado muda o filtro para a opcao correspondente,
+                                                // E atribui o filtro para este valor.
                                                 onClick={() => {
                                                     if (itemSelecionado == item) {
                                                         setItemSelecionado("Filtro");
@@ -674,6 +784,9 @@ export default function Central() {
                                                 }}
                                             >
                                                 { 
+                                                    // Caso o filtro selecionado seja igual a item isso significa ele que esta
+                                                    // selecionado sendo assim ele renderiza o icone de check caso contrario nao
+                                                    // renderiza nada.
                                                     itemSelecionado == item ?
                                                     <Check className="mt-0.5" /> : null 
                                                 }
@@ -685,110 +798,234 @@ export default function Central() {
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>
+                    {/*
+                        grid: Define o container como um display grid, permitindo organizar os elementos filhos em linhas e colunas.
+                        place-items-center: Centraliza os itens tanto horizontalmente quanto verticalmente dentro da grade.
+                        items-start: Alinha os itens no início do eixo transversal do contêiner.
+                        xs:grid-cols-2: Em telas maiores que 450px, o componente seja dividido em 2 colunas.
+                        lg:grid-cols-3: Em telas maiores que 1024px, o componente seja dividido em 3 colunas.
+                        lg:grid-cols-4: Em telas maiores que 1536px, o componente seja dividido em 4 colunas.
+                        gap-6: Adiciona um espaçamento de 6 entre os itens.
+                        lg:gap-8: Em telas maiores que 1024px, adiciona um espaçamento de 6 entre os itens.
+                        mt-6: Define que a margem superior ao componente de 6.
+                    */}
                     <div className="grid place-items-center items-start xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 mt-6">
                     {
                         (() => {
+                            // Mapeia cada personagem do array personagens para gerar um card deles ou retornar null, de acordo com o filtro aplicado.
                             const data = personagens.map((personagem: Personagem) => {
-                            const key = filtro.por.toLowerCase() as keyof Personagem;
-
-                            return (
-                                filtro.por === "Filtro" ||
-                                (filtro.por !== "Filtro" &&
-                                personagem[key].toLowerCase().includes(filtro.valor.toLowerCase())) ? (
+                              // Converte o valor do filtro para minúsculas para comparar com as propriedades do personagem.
+                              // O casting garante que a chave corresponde a uma propriedade válida de Personagem.
+                                const key = filtro.por.toLowerCase() as keyof Personagem;
+                          
+                                return (
+                                    // Verifica se não há filtro ativo ou se o personagem atende ao filtro.
+                                    filtro.por === "Filtro" ||
+                                    (filtro.por !== "Filtro" &&
+                                    // Converte o valor da propriedade do personagem e o valor do filtro para minúsculas e verifica se o primeiro inclui o segundo.
+                                    personagem[key].toLowerCase().includes(filtro.valor.toLowerCase())
+                                    ) ? (
+                                    /* 
+                                        Se a condição for verdadeira, renderiza um Card com os dados do personagem.
+                                        key: Define uma key para cada personagem que sera igual ao id deles.
+                                        hover:-mt-3: Quando o usuário passa o mouse sobre o elemento, ele se move 3 para cima.
+                                        hover:mb-3: Quando o usuário passa o mouse sobre o elemento, ele adiciona uma margem inferior de 3, para compensar o movimento do -mt-3.
+                                        transition-all: Aplica uma transição suave para todas as propriedades animáveis, garantindo que os efeitos de hover aconteçam de forma fluida.
+                                    */
                                     <Card key={personagem.id} className="hover:-mt-3 hover:mb-3 transition-all">
                                         <CardHeader>
                                             <CardTitle>
                                                 {personagem.nome}
                                             </CardTitle>
                                             <CardDescription>
+                                                {/*
+                                                    xs:grid: Em telas maiores de 450px o display do componente sera grid.
+                                                    text-sm: Define o tamanho padrão do texto como "sm".
+                                                    font-medium: Define o tipo da fonte utilizada no componente.
+                                                    leading-noe: Diminui o espacamento entre as linhas do texto.
+                                                */}
                                                 <p className="xs:grid text-sm font-medium leading-none">
                                                     Última Localização:
+                                                    {/* 
+                                                        ml-1: Define que a margem esquerda do componente vai ser de 1. 
+                                                        break-words: Adiciona a propriedade de quebra de linhas das palabras quando
+                                                        o tamanho delas superar a do componente.
+                                                        underline: Adiciona um underline ao texto.                                                  
+                                                    */}
                                                     <span className="ml-1 break-words underline">
                                                         {
+                                                            // Se a localização do personagem não for "Unkown", exibe-a; caso contrário, mostra "Desconhecida"
                                                             personagem.localizacao !== "Unkown" ? personagem.localizacao : "Desconhecida"
                                                         }
                                                     </span>
                                                 </p>
                                             </CardDescription>
                                         </CardHeader>
+                                        {/*
+                                            relative: Define a posição do container como relativa, possibilitando o posicionamento
+                                            absoluto de elementos internos em relação a este.
+                                            bg-gradient-to-tr: Aplica um fundo com gradiente que vai da parte inferior esquerda até
+                                            a parte superior direita.
+                                            from-[#1a9f9a]: Especifica a cor inicial do gradiente, um tom de verde.
+                                            to-[#b6c937]: Especifica a cor final do gradiente, um tom de amarelo-esverdeado.
+                                            rounded-lg: Adiciona bordas arredondadas grandes ao container.
+                                        */}
                                         <CardContent className="relative bg-gradient-to-tr from-[#1a9f9a] to-[#b6c937] rounded-lg">
-                                            <div>
-                                                <img className="rounded-lg" src={personagem.imagem} />
-                                            </div>
-                                            <div className="rounded-lg text-center">
-                                                <p className="text-xl lg:text-lg text-white font-semibold lg:my-1 lg:leading-[1.1]">
-                                                    { personagem.especie }
-                                                </p>
-                                            </div>
-                                            <div
-                                                className={`${
-                                                    ["Vivo", "Viva"].includes(personagem.status) ? "bg-green-600" : 
-                                                    ["Morto", "Morta"].includes(personagem.status) ? "bg-red-500" : 
-                                                    "bg-[#707070]"
-                                                } font-semibold px-5 py-0.5 rounded-r-lg absolute top-0 mt-4 text-white`}
-                                            >
-                                                <p className="text-center">
-                                                    { personagem.status }
-                                                </p>
-                                            </div>
+                                        <div>
+                                            {/* 
+                                                Exibe a imagem do personagem
+                                                rounded-lg: Adiciona bordas arredondadas grandes ao container. 
+                                            */}
+                                            <img 
+                                                className="rounded-lg" 
+                                                src={personagem.imagem} 
+                                            />
+                                        </div>
+                                        {/*
+                                            rounded-lg: Adiciona bordas arredondadas grandes ao container.
+                                            text-center: Centraliza o texto horizontalmente.
+                                        */}
+                                        <div className="rounded-lg text-center">
+                                            {/*
+                                                text-xl: Define o tamanho do texto como "xl".
+                                                lg:text-lg: Em telas maiores que 1024px, define o tamanho do texto como "lg".
+                                                text-white" Define a cor do texto com branco.
+                                                font-semibold: Muda a fonte dos componente para uma fonte mais para o lado do negrito.
+                                                lg:my-1: Em telas maiores que 1024px, adiciona uma margem vertical de 1 para 
+                                                compensar a reducao de espaco de linhas do leaading-[1.1].
+                                                leading-[1.1]: Reduz o espaco entre as linhas do texto.
+                                            */}
+                                            <p className="text-xl lg:text-lg text-white font-semibold lg:my-1 lg:leading-[1.1]">
+                                                { personagem.especie } {/* Exibe a espécie do personagem */}
+                                            </p>
+                                        </div>
+                                        <div
+                                            /*
+                                                Caso o status do personagem seja "Vivo" ou "Viva", define o background do componente como um verde,
+                                                Caso seja "Morto" ou "Morta", define o background como um vermelho,
+                                                Caso contrario ou seja desconhecido, define o background como um cinza.
+                                                font-semibold: Muda a fonte dos componente para uma fonte mais para o lado do negrito.
+                                                px-5: Adiciona um padding na direita e esquerda de tamanho 5.
+                                                py-0.5: Adiciona um padding na vertical 0.5.
+                                                rounded-b-lg: Adiciona bordas arredondadas grandes ao canto inferior do container.
+                                                absolute: Posiciona o elemento de forma absoluta em relação ao seu contêiner pai.
+                                                top-0: Posiciona o elemento com 0 de distância do topo do contêiner, ou seja, encostado na borda superior.
+                                                mt-4: Adiciona uma margem superior de tamanho 4 ao componente.
+                                                text-white: Define a cor do texto como branca.
+                                            */    
+                                            className={`${
+                                                ["Vivo", "Viva"].includes(personagem.status) ? "bg-green-600" : 
+                                                ["Morto", "Morta"].includes(personagem.status) ? "bg-red-500" : 
+                                                "bg-[#707070]"
+                                            } font-semibold px-5 py-0.5 rounded-r-lg absolute top-0 mt-4 text-white`}
+                                        >
+                                            {/* text-center: Centraliza o texto horizontalmente. */}
+                                            <p className="text-center">
+                                                { personagem.status } 
+                                            </p>
+                                        </div>
                                         </CardContent>
                                     </Card>
-                                ) : null
-                            );
-                        });
-
+                                    ) : null // Se o personagem não atender ao filtro, retorna null.
+                                );
+                            });
+                          
+                            // Filtra os personagens nulos.
                             const validData = data.filter((item) => item !== null);
-
-                            return validData.length > 0 ? validData : <p className="text-p-responsive text-center absolute  px-[13.3vw] xxs:px-[14.8vw] lg:px-[20vw]">Nenhum personagem foi retornado nessa pagina!</p>;
-                        })()
+                          
+                            // Retorna os Cards se houver algum personagem válido, caso contrário, exibe uma mensagem informando que nenhum personagem foi encontrado
+                            return validData.length > 0 ? validData : (
+                                /*
+                                    text-p-responsive: classe criada no arquivo tailwind.config.js para facilitar a responsividade da tag <p>.
+                                    text-center: Centraliza o texto horizontalmente.
+                                    absolute: Posiciona o elemento de forma absoluta em relação ao seu contêiner pai.
+                                    px-[13.3vw]: Adiciona um padding na direita e esquerda de tamanho 13.3vw.
+                                    xxs:px-[14.8vw]: Em telas maiores de 450px, adiciona um padding na direita e esquerda de tamanho 14.8vw.
+                                    lg:px-[14.8vw]: Em telas maiores de 1024px, adiciona um padding na direita e esquerda de tamanho 20vw.
+                                */
+                                <p className="text-p-responsive text-center absolute px-[13.3vw] xxs:px-[14.8vw] lg:px-[20vw]">
+                                    Nenhum personagem foi retornado nessa pagina!
+                                </p>
+                            );
+                          })()                          
                     }
 
                     </div>
                 </div>
                 <Toaster />
             </PaginaMeioUmaColuna>
+            {/*
+                <PaginaRodape>: Define o rodapé da página.
+                px-[13.3vw]: Adiciona padding horizontal de 13.3% da largura da viewport.
+                xxs:px-[14.8vw]: Em telas maiores que 390px, ajusta o padding horizontal para 14.8vw.
+                lg:px-[25.4vw]: Em telas maiores que 1024px, ajusta o padding horizontal para 25.4vw.
+                mt-6: Adiciona margem superior de 6.
+            */}
             <PaginaRodape className="px-[13.3vw] xxs:px-[14.8vw] lg:px-[25.4vw] mt-6">
+                {/* <Pagination>: Componente de paginação que agrupa os itens de navegação entre páginas. */}
                 <Pagination>
+                    {/* <PaginationContent>: Container que engloba os itens individuais de paginação. */}
                     <PaginationContent>
+                        {/*
+                            <PaginationItem>: Representa um item de paginação.
+                            A classe "opacity-50" é aplicada se não houver página anterior, indicando que o botão está desativado.
+                            onClick: Se houver página anterior, decrementa o número da página e rola a tela para o topo de forma suave; caso contrário, 
+                            exibe informa pelo toast que o usuário está na primeira página.
+                        */}
                         <PaginationItem 
                             className={navegacao.voltar == null ? "opacity-50" : ""}
                             onClick={() => {
-                                if (navegacao.voltar != null) {
-                                    setNumeroPagina(numeroPagina - 1);
-                                    window.scrollTo({ top: 0, behavior: "smooth" });
-                                } else {
-                                    toast({
-                                        variant: 'destructive',
-                                        title: "Você está na primeira página!",
-                                        description: "Não é possível voltar, pois você já está na primeira página.",
-                                    });
-                                }
+                            if (navegacao.voltar != null) {
+                                setNumeroPagina(numeroPagina - 1);
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                            } else {
+                                toast({
+                                    variant: 'destructive',
+                                    title: "Você está na primeira página!",
+                                    description: "Não é possível voltar, pois você já está na primeira página.",
+                                });
+                            }
                             }}
-                        >
+                        >      
+                            {/* <PaginationPrevious>: Ícone ou componente que representa a ação de ir para a página anterior. */}
                             <PaginationPrevious />
                         </PaginationItem>
+                        {/*
+                            <PaginationItem>: Exibe o número da página atual.
+                            text-sm: Define o tamanho padrão do texto como "sm".
+                            font-semibold: Muda a fonte dos componente para uma fonte mais para o lado do negrito.
+                            text-gray-900: Muda a cor do texto para um cinza escuro.
+                        */}
                         <PaginationItem className="text-sm font-semibold text-gray-900">
                             Pagina { numeroPagina } 
                         </PaginationItem>
+                        {/*
+                            <PaginationItem>: Representa o item de paginação para avançar para a próxima página.
+                            A classe "opacity-50" é aplicada se não houver página seguinte, indicando que o botão está desativado.
+                            onClick: Se houver próxima página, incrementa o número da página e rola a tela para o topo de forma suave; 
+                            caso contrário, exibe informa no toast que o usuário está na última página.
+                        */}
                         <PaginationItem
                             className={navegacao.proximo == null ? "opacity-50" : ""}
                             onClick={() => {
-                                if (navegacao.proximo != null) {
-                                    setNumeroPagina(numeroPagina + 1);
-                                    window.scrollTo({ top: 0, behavior: "smooth" });
-                                } else {
-                                    toast({
-                                        variant: 'destructive',
-                                        title: "Você está na última página!",
-                                        description: "Não é possível avançar, pois você já está na última página.",
-                                    });
-                                }
+                            if (navegacao.proximo != null) {
+                                setNumeroPagina(numeroPagina + 1);
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                            } else {
+                                toast({
+                                    variant: 'destructive',
+                                    title: "Você está na última página!",
+                                    description: "Não é possível avançar, pois você já está na última página.",
+                                });
+                            }
                             }}
                         >
+                            {/* <PaginationNext>: Ícone ou componente que representa a ação de avançar para a próxima página. */}
                             <PaginationNext />
                         </PaginationItem>
                     </PaginationContent>
                 </Pagination>
+                {/* <Creditos>: Componente que exibe os créditos do projeto. */}
                 <Creditos />
             </PaginaRodape>
         </PaginaCorpo>

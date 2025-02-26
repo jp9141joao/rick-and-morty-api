@@ -53,6 +53,33 @@ export default function Cadastrar() {
             e.preventDefault();
             // Ativa o indicador de carregamento.
             setCarregando(true);
+
+            // Verifica se o valor de email e senha e vazio, e retorna o erro para o usuario caso seja
+            // por meio do toast, e indica o local do erro formatando a borda do input em vermelho.
+
+            if (nome == "") {
+                setAvisoInput("Nome");
+                toast({
+                    variant: 'destructive',
+                    title: 'Nome Completo não Informado',
+                    description: 'Nome Completo não foi informado. Forneça um nome completo para continuar.',
+                });                    
+            } else if (email == "") {
+                setAvisoInput("Email");
+                toast({
+                    variant: 'destructive',
+                    title: 'E-mail não Informado',
+                    description: 'E-mail não foi informado. Forneça um e-mail para continuar.',
+                }); 
+            } else if (senha == "") {
+                setAvisoInput("Senha");
+                toast({
+                    variant: 'destructive',
+                    title: 'Senha não Informada',
+                    description: 'Senha não foi informada. Forneça uma senha para continuar.',
+                });
+            }
+
             // Chama a função de cadastro passando nome, email e senha.
             const response = await cadastrar({ nome, email, senha } as Usuario);
 
