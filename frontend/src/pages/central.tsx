@@ -5,7 +5,7 @@
 // <PaginaRodape>: Define o componente que representa o rodapé da página.
 import { PaginaCorpo, PaginaRodape, PaginaMeioUmaColuna, PaginaTopo } from "../components/PageLayout/LayoutPagina";
 import { Creditos } from "@/components/Creditos"; // Importa o componente <Creditos> da criação do projeto.
-import { Check, ChevronDown, MapPin, Menu, MoveRight } from "lucide-react"; // Importa ícones do "lucide-react", utilizados para exibir ícones na interface.
+import { Check, ChevronDown, Menu, MoveRight } from "lucide-react"; // Importa ícones do "lucide-react", utilizados para exibir ícones na interface.
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"; // Importa os componentes do dropdown menu, que fornecem uma interface interativa para exibir opções em um menu suspenso.
 import { useEffect, useState } from "react"; 
 // useState: Permite criar e gerenciar estados locais dentro do componente.
