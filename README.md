@@ -10,6 +10,13 @@ O projeto **Rick and Morty API** integra uma interface frontend moderna com um b
 - **Backend:**  
   Construído com Express e TypeScript, o backend utiliza o Prisma como ORM para interagir com um banco de dados PostgreSQL. A aplicação implementa autenticação via JWT, validação de dados e operações de CRUD para usuários.
 
+## Acesso via Web
+
+Você pode acessar o projeto hospedado através do seguinte link:  
+[https://rick-and-morty-api-jp9141joao.netlify.app/inicio](https://rick-and-morty-api-jp9141joao.netlify.app/inicio)
+
+*Observação:* Como os serviços de deploy utilizados são gratuitos, pode ocorrer um tempo maior de resposta nas requisições ao backend.
+
 ## Funcionalidades Principais
 
 - **Autenticação e Autorização:**  
