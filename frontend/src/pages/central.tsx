@@ -77,7 +77,6 @@ export default function Central() {
 
             // Chama a função mudarInfo passando o nome e o email para atualizar as informações do usuário.
             const response = await mudarInfo({ nome, email, operacao: "Info" } as Info);
-
             // Se a requisição for bem-sucedida:
             if (response.success) {
                 // Recarrega as informações do usuário.
@@ -225,10 +224,8 @@ export default function Central() {
         try {
             e.preventDefault();
             setCarregando(true);
-
             // Chama a função mudarInfo passando a senha atual e a nova senha.
-            const response = await mudarInfo({ senha, novaSenha } as Info);
-
+            const response = await mudarInfo({ senha, novaSenha, operacao: "Senha" } as Info);
             // Se a requisição for bem-sucedida:
             if (response.success) {
                 // Recarrega as informações do usuário.
@@ -247,33 +244,54 @@ export default function Central() {
                 // Trata os diferentes tipos de erro retornados na resposta e retorna 
                 // para o usuario por meio do toast a mensagem do erro ocorrido, junto com isso ele configura o 
                 // avisoInput para fornecer o feedback de qual campo o erro aconteceu.
-                if (response.error == "Erro: Senha Inválido!") {
+                if (response.error == "Erro: Senha não Informada!") {
                     setAvisoInput("Senha");
                     toast({
                         variant: 'destructive',
-                        title: 'Senha Inválida',
-                        description: 'Por favor, forneça uma senha que atenda aos critérios mínimos, incluindo pelo menos uma letra maiúscula, um número e um caractere especial.',
+                        title: 'Senha não Informada',
+                        description: 'Senha não foi informada. Forneça uma senha para continuar.',
                     });
-                } else if (response.error = "Erro: Senha Muito Pequena!") {
+                } else if (response.error == "Erro: Senha com Formato Inválido!") {
                     setAvisoInput("Senha");
                     toast({
                         variant: 'destructive',
-                        title: 'Senha Muito Curta',
-                        description: 'Sua senha é muito curta. Por favor, insira uma senha com pelo menos 8 caracteres.',
+                        title: 'Senha Formato Inválido',
+                        description: 'O formato da senha inserida é inválido. Forneça uma senha que atenda aos critérios mínimos, incluindo pelo menos uma letra maiúscula, um número, um caractere especial e no mínimo 8 caracteres.',
                     });
-                } if (response.error == "Erro: Nova Senha Inválida!") {
+                } else if (response.error == "Erro: Senha Incorreta!") {
+                    setAvisoInput("Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Senha Incorreta',
+                        description: 'A senha inserida não corresponde à senha da sua conta. Verifique e tente novamente.',
+                    });
+                } else if (response.error == "Erro: Nova Senha não Informada!") {
+                    setAvisoInput("Nova-Senha");
+                    toast({ 
+                        variant: 'destructive',
+                        title: 'Nova Senha não Informada',
+                        description: 'Nova Senha não foi informada. Forneça uma nova senha para continuar.',
+                    });
+                } else if (response.error == "Erro: Nova Senha com Formato Inválido!") {
                     setAvisoInput("Nova-Senha");
                     toast({
                         variant: 'destructive',
-                        title: 'Nova Senha Inválida',
-                        description: 'Por favor, forneça uma nova senha que atenda aos critérios mínimos, incluindo pelo menos uma letra maiúscula, um número e um caractere especial.',
+                        title: 'Nova Senha com Formato Inválido',
+                        description: 'O formato da nova senha inserida é inválido. Forneça uma nova senha que atenda aos critérios mínimos, incluindo pelo menos uma letra maiúscula, um número, um caractere especial e no mínimo 8 caracteres.',
                     });
-                } else if (response.error = "Erro: Nova Senha Muito Pequena!") {
+                } else if (response.error == "Erro: Nova Senha Muito Grande!") {
                     setAvisoInput("Nova-Senha");
                     toast({
                         variant: 'destructive',
-                        title: 'Nova Senha Muito Curta',
-                        description: 'Sua nova senha é muito curta. Por favor, insira uma nova senha com pelo menos 8 caracteres.',
+                        title: 'Nova Senha Muito Grande',
+                        description: 'Sua nova senha é muito grande. Por favor, insira uma nova senha menor.',
+                    });
+                } else if (response.error == "Erro: Nova Senha Igual a Antiga!") {
+                    setAvisoInput("Nova-Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Erro: Nova Senha Igual a Antiga',
+                        description: 'A nova senha não pode ser igual à senha atual. Por favor, insira uma senha diferente.',
                     });
                 } else {
                     // Lança um erro genérico se não for bem sucedida.
@@ -697,8 +715,15 @@ export default function Central() {
                                             className="w-full"
                                             // type:button: pois o componente nao ira fazer nenhuma requisicao nesse parte.
                                             type="button"
-                                            // Ao clicar no componente ele ira voltar o conteudo da sidebar, atribuindo a variavel como "Menu".
-                                            onClick={() => setConteudo("Menu")}
+                                            // Ao clicar no componente ele ira voltar o conteudo da sidebar, atribuindo a variavel como "Menu"
+                                            // alem disso ele limpa os valores de nome, email, senha e novaSenha.
+                                            onClick={() => {
+                                                setNome("");
+                                                setEmail("");
+                                                setSenha("");
+                                                setNovaSenha("");
+                                                setConteudo("Menu");
+                                            }}
                                         >
                                             Voltar
                                         </Button>

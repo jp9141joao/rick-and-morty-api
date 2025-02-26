@@ -236,34 +236,34 @@ const alterarInfo = async (req, res) => {
                 novoUsuario = { ...novoUsuario, email: email };
             }
         }
-        else if (operacao == "Senha") {
+        if (operacao == "Senha") {
             if (!senha) {
                 res.status(200).json(http_result_1.HttpResult.Fail("Erro: Senha não Informada!"));
-                return;
+                return; //
             }
             if (!novaSenha) {
                 res.status(200).json(http_result_1.HttpResult.Fail("Erro: Nova Senha não Informada!"));
-                return;
+                return; //
             }
             if (senha.length > 255 || !utils_1.Utils.SenhaValida(senha)) {
                 res.status(200).json(http_result_1.HttpResult.Fail("Erro: Senha com Formato Inválido!"));
-                return;
+                return; //
             }
             const validarSenha = await bcryptjs_1.default.compare(senha, usuario.senha);
             if (!validarSenha) {
                 res.status(200).json(http_result_1.HttpResult.Fail("Erro: Senha Incorreta!"));
-                return;
+                return; //
             }
             if (!utils_1.Utils.SenhaValida(novaSenha)) {
                 res.status(200).json(http_result_1.HttpResult.Fail("Erro: Nova Senha com Formato Inválido!"));
-                return;
+                return; //
             }
             else if (novaSenha.length > 255) {
                 res.status(200).json(http_result_1.HttpResult.Fail("Erro: Nova Senha Muito Grande!"));
                 return;
             }
-            const validarNovaSenha = await bcryptjs_1.default.compare(senha, usuario.senha);
-            if (!validarNovaSenha) {
+            const validarNovaSenha = await bcryptjs_1.default.compare(novaSenha, usuario.senha);
+            if (validarNovaSenha) {
                 res.status(200).json(http_result_1.HttpResult.Fail("Erro: Nova Senha Igual a Antiga!"));
                 return;
             }
