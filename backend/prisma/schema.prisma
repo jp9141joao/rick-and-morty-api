@@ -1,15 +1,33 @@
+// Define o gerador que irá criar o Prisma Client em JavaScript, que ser usado
+// para integir com o banco de dados da aplicacao.
+
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client-js" // Especifica que será gerado um cliente para JavaScript.
 }
+
+
+// Define que esta utilizando o banco de dados PostgreSQL para a aplicacao.
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"          // Especifica que o banco de dados é do tipo PostgreSQL.
+  url      = env("DATABASE_URL")   // A URL de conexão é definida através da variável de ambiente DATABASE_URL.
 }
 
+
+// Define a estrutura da tabela usuario.
+
 model tb_usuario {
+  // 'id': chave primária do tipo BigInt com auto incremento
+  // '@default(autoincrement())': indica que o valor será gerado automaticamente.
   id    BigInt @id(map: "pk_tb_usuario_id") @default(autoincrement())
+
+  // 'nome': armazena o nome do usuário, no qual sera do tipo varchar podendo armazenar ate 30 caracteres.
   nome  String @db.VarChar(30)
+
+  // 'email': armazena o e-mail do usuário, no qual sera do tipo varchar podendo armazenar ate 255 caracteres.
+  // '@unique': garante que não haverá registros com e-mails repetidos.
   email String @unique @db.VarChar(255)
+
+  /'senha': armazena a senha do usuário, no qual sera do tipo varchar podendo armazenar ate 255 caracteres.
   senha String @db.VarChar(255)
 }

@@ -129,12 +129,11 @@ export const criarConta = async (req: Request, res: Response): Promise<void> => 
             return;
         }
 
-        const nomeFormatado = nome.toLowerCase().split(" ").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
         const senhaCriptografada = await bcrypt.hash(senha, 10);
         
         await prisma.tb_usuario.create({
             data: {
-                nome: nomeFormatado,
+                nome: nome,
                 email: email,
                 senha: senhaCriptografada
             }
@@ -294,10 +293,7 @@ export const alterarInfo = async (req: Request, res: Response) => {
                 return;
             }
 
-            if (!Utils.ValorExiste(senha)) {
-                res.status(200).json(HttpResult.Fail("Erro: Senha não Informada!"));
-                return;
-            } else if (senha.length > 255 || !Utils.SenhaValida(senha)) {
+            if (senha.length > 255 || !Utils.SenhaValida(senha)) {
                 res.status(200).json(HttpResult.Fail("Erro: Senha com Formato Inválido!"));
                 return;
             }
@@ -317,7 +313,16 @@ export const alterarInfo = async (req: Request, res: Response) => {
                 return;
             }
 
-            novoUsuario = { ...novoUsuario, senha: novaSenha };
+            const validarNovaSenha = await bcrypt.compare(senha, usuario.senha);
+
+            if (!validarNovaSenha) {
+                res.status(200).json(HttpResult.Fail("Erro: Nova Senha Igual a Antiga!"));
+                return;
+            }
+
+            const novaSenhaCriptografada = await bcrypt.hash(senha, 10);
+
+            novoUsuario = { ...novoUsuario, senha: novaSenhaCriptografada };
         }
 
         const usuarioAtualizado = await prisma.tb_usuario.update({

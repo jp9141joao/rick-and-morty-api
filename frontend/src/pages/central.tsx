@@ -192,6 +192,13 @@ export default function Central() {
                         title: 'Nova Senha Muito Grande',
                         description: 'A nova senha inserida é muito grande. Insira uma nova senha menor',
                     });
+                } else if (response.error == "Erro: Nova Senha Igual a Antiga!") {
+                    setAvisoInput("Nova-Senha");
+                    toast({
+                        variant: 'destructive',
+                        title: 'Nova Senha Igual a Antiga!',
+                        description: 'A nova senha inserida é igual a antiga. Insira uma senha diferente',
+                    });
                 } else {
                     // Lança um erro genérico se não for bem sucedida.
                     throw new Error("A solicitação falhou. Verifique os dados e tente novamente.");
@@ -839,10 +846,10 @@ export default function Central() {
                                     /* 
                                         Se a condição for verdadeira, renderiza um Card com os dados do personagem.
                                         key: Define uma key para cada personagem que sera igual ao id deles.
-                                        hover:mb-3: Quando o usuário passa o mouse sobre o elemento, ele se move para baixo.
+                                        hover:mb-3: Quando o usuário passa o mouse sobre o elemento, ele se move para cima.
                                         transition-all: Aplica uma transição suave para todas as propriedades animáveis, garantindo que os efeitos de hover aconteçam de forma fluida.
                                     */
-                                    <Card key={personagem.id} className="hover:translate-y-3 transition-all">
+                                    <Card key={personagem.id} className="hover:-translate-y-3 transition-all">
                                         <CardHeader>
                                             <CardTitle>
                                                 {personagem.nome}

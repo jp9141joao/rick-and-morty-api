@@ -223,10 +223,9 @@ export default function Entrar() {
                                 lg:text-base: Em telas maiores que 1024px, o tamanho do texto passa a ser o padrao.
                                 xl:text-[1.8vw]: Em telas maiores que 1536px, o tamanho do texto é ajustado para 1.8vw.
                                 xl:leading-[1.2]: Em telas maiores que 1536px, define a altura da linha como 1.2, garantindo um espaçamento adequado entre as linhas.
-                                mt-2: Adiciona uma margem superior de 2, criando um pequeno espaçamento acima do parágrafo.
-                                mt-2: Em telas maiores que 1024px, adiciona uma margem superior de 2, criando um pequeno espaçamento acima do parágrafo.
+                                mt-1: Adiciona uma margem superior de 1, criando um pequeno espaçamento acima do parágrafo.
                             */}
-                            <p className="xxs:text-lg xs:text-xl sm:text-[2.7vw] lg:text-base xl:text-[1.3vw] xl:leading-[1.2] mt-2 lg:mt-1">
+                            <p className="xxs:text-lg xs:text-xl sm:text-[2.7vw] lg:text-base xl:text-[1.3vw] xl:leading-[1.2] mt-1">
                                 Conecte-se para utilizar nossa ferramenta.
                             </p>
                         </div>

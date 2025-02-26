@@ -111,11 +111,10 @@ const criarConta = async (req, res) => {
             res.status(200).json(http_result_1.HttpResult.Fail("Erro: E-mail Já Cadastrado!"));
             return;
         }
-        const nomeFormatado = nome.toLowerCase().split(" ").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
         const senhaCriptografada = await bcryptjs_1.default.hash(senha, 10);
         await prisma.tb_usuario.create({
             data: {
-                nome: nomeFormatado,
+                nome: nome,
                 email: email,
                 senha: senhaCriptografada
             }
@@ -246,11 +245,7 @@ const alterarInfo = async (req, res) => {
                 res.status(200).json(http_result_1.HttpResult.Fail("Erro: Nova Senha não Informada!"));
                 return;
             }
-            if (!utils_1.Utils.ValorExiste(senha)) {
-                res.status(200).json(http_result_1.HttpResult.Fail("Erro: Senha não Informada!"));
-                return;
-            }
-            else if (senha.length > 255 || !utils_1.Utils.SenhaValida(senha)) {
+            if (senha.length > 255 || !utils_1.Utils.SenhaValida(senha)) {
                 res.status(200).json(http_result_1.HttpResult.Fail("Erro: Senha com Formato Inválido!"));
                 return;
             }
@@ -267,7 +262,13 @@ const alterarInfo = async (req, res) => {
                 res.status(200).json(http_result_1.HttpResult.Fail("Erro: Nova Senha Muito Grande!"));
                 return;
             }
-            novoUsuario = { ...novoUsuario, senha: novaSenha };
+            const validarNovaSenha = await bcryptjs_1.default.compare(senha, usuario.senha);
+            if (!validarNovaSenha) {
+                res.status(200).json(http_result_1.HttpResult.Fail("Erro: Nova Senha Igual a Antiga!"));
+                return;
+            }
+            const novaSenhaCriptografada = await bcryptjs_1.default.hash(senha, 10);
+            novoUsuario = { ...novoUsuario, senha: novaSenhaCriptografada };
         }
         const usuarioAtualizado = await prisma.tb_usuario.update({
             where: {
