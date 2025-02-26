@@ -375,7 +375,7 @@ export default function Central() {
                             personagem.status == "Dead" ? `Mort${g}` :
                             // Retorna desconhecido caso seja Unkown
                             "Desconhecido",
-                        especie: personagem.species == "unknown" ? "Desconhecido" : personagem.species,
+                        especie: personagem.species == "unknown" ? "Desconhecida" : personagem.species,
                         genero:
                             // Caso traduz os genero para Masculino ou Feminino.
                             personagem.gender == "Female" ? "Feminino" :
