@@ -314,12 +314,11 @@ export default function Entrar() {
                         <Toaster />
                     </form>
                 </div>
-                <PaginaRodape>
-                <Creditos />
-            </PaginaRodape>
             </PaginaMeio>
             {/* <PaginaRodape> contém o rodapé da página, onde os créditos são exibidos. */}
-            
+            <PaginaRodape>
+                <Creditos />
+            </PaginaRodape>
         </PaginaCorpo>
     )
 }
