@@ -1,50 +1,141 @@
-# React + TypeScript + Vite
+# Rick and Morty API - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é a interface frontend para a aplicação Rick and Morty API. Atualmente, ele foca somente na camada de apresentação, permitindo que o usuário explore informações dos personagens da série como nome, localização, espécie e genêro. Permite também que o usuario faça seu cadastro, login e mude suas informações como nome, e-mail e senha.
 
-Currently, two official plugins are available:
+## Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React** – Biblioteca para criação de interfaces dinâmicas e componentizadas.
+- **TypeScript** – Adiciona tipagem estática ao JavaScript para maior robustez no desenvolvimento.
+- **Tailwind CSS** – Framework utilitário para criação de layouts responsivos e estilizados.
+- **React Router DOM** – Gerenciamento de rotas na aplicação.
+- **Outros Componentes Customizados** – Componentes de UI como Input, Spinner, etc para padronização do design.
 
-## Expanding the ESLint configuration
+## Pré-requisitos
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [Node.js](https://nodejs.org/) (versão 14 ou superior)
+- [npm](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
 
-- Configure the top-level `parserOptions` property like this:
+Para verificar se o Node.js e o npm estão instalados, utilize os comandos:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+node -v
+npm -v
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Instalação
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. **Clone o repositório**
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+   ```bash
+    git clone https://github.com/seu-usuario/rick-and-morty-api.git
+   ```
+
+2. **Acesse a pasta do frontend**
+
+   ```bash
+    cd frontend
+   ```
+
+3. **Instale as dependências**
+
+   Utilizando npm:
+
+   ```bash
+    npm install
+   ```
+
+   Ou, se preferir o Yarn:
+
+   ```bash
+    yarn install
+   ```
+
+## Uso
+
+Para iniciar o servidor de desenvolvimento e visualizar a aplicação em seu navegador, execute:
+
+```bash
+  npm run dev
 ```
+
+Ou, se estiver usando Yarn:
+
+```bash
+  yarn dev
+```
+
+A aplicação ficará disponível normalmente em [http://localhost:3000](http://localhost:3000) porém a porta pode variar.
+
+## Estrutura do Projeto
+
+A seguir, uma visão geral da estrutura do projeto:
+
+```
+rick-and-morty-api/
+└── frontend/
+    ├── .vite/                  # Diretório de cache do Vite
+    ├── dist/                   # Diretório de build para produção
+    ├── node_modules/           # Dependências instaladas
+    ├── public/                 # Arquivos estáticos e index.html
+    ├── src/
+    │   ├── assets/             # Imagens e outros recursos
+    │   ├── components/         # Componentes reutilizáveis (layouts, botões, inputs, etc.)
+    │   │   ├── PageLayout/
+    │   │   ├── RotaProtegida/
+    │   │   ├── ui/
+    │   │   ├── VerificarToken/
+    │   │   ├── Creditos.tsx
+    │   │   └── Voltar.tsx
+    │   ├── hooks/              # Hooks customizados
+    │   │   └── use-toast.ts
+    │   ├── lib/                # Funções utilitárias
+    │   │   └── utils.ts
+    │   ├── pages/              # Páginas (cadastrar, central, entrar, início, página não encontrada, etc.)
+    │   │   ├── cadastrar.tsx
+    │   │   ├── central.tsx
+    │   │   ├── entrar.tsx
+    │   │   ├── inicio.tsx
+    │   │   └── paginaNaoEncontrada.tsx
+    │   ├── service/            # Serviços de integração com a API
+    │   ├── types/              # Definições de tipos TypeScript
+    │   ├── app.css
+    │   ├── app.tsx             # Componente raiz da aplicação
+    │   ├── index.css
+    │   ├── main.tsx
+    │   └── vite-env.d.ts
+    ├── .gitignore
+    ├── componentes.json
+    ├── eslint.config.js
+    ├── index.html
+    ├── package-lock.json
+    ├── package.json            # Configurações do projeto e dependências
+    ├── postcss.config.js
+    ├── tailwind.config.js      # Configuração do Tailwind CSS
+    ├── ts.config.app.json
+    ├── tsconfig.json
+    ├── tsconfig.node.json
+    └── vite.config.ts
+```
+
+## Comandos Úteis
+
+- **Instalar dependências:**  
+  `npm install` ou `yarn install`
+
+- **Iniciar o servidor de desenvolvimento:**  
+  `npm run dev` ou `yarn dev`
+
+- **Build para produção:**  
+  `npm run build` ou `yarn build`
+
+## Observações
+
+- **API Externa:**  
+  Este frontend consome dados da [Rick and Morty API](https://rickandmortyapi.com/). Certifique-se de que seu dispositivo possua conexão com a internet para que os dados sejam carregados corretamente.
+
+- **Atenção à URL do Backend:**  
+  Caso o backend seja executado localmente ou em algum outro local, **lembre-se de alterar a URL base configurada no arquivo de serviços (service)** para apontar para o seu servidor local. Por exemplo, se o backend estiver rodando em `http://localhost:3001`, ajuste a URL no service para refletir essa alteração.
+
+- **Customizações:**  
+  Caso necessite de ajustes na estilização, verifique o arquivo `tailwind.config.js` e os componentes presentes na pasta `src/components/`.
+
