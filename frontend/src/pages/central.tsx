@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 // useState: Permite criar e gerenciar estados locais dentro do componente.
 // useEffect: Permite criar efeitos colaterais ao montar o componente ou quando determinado valor for alterado.
 import { Button } from "@/components/ui/button"; // Importa o componente <Button> que renderiza botões customizados com estilos pré-definidos.
-import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"; // Importa os componentes do Sheet, que permitem exibir uma interface de "drawer" ou painel lateral interativo.
+import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"; // Importa os componentes do Sheet, que permitem exibir uma interface de "drawer" ou painel lateral interativo.
 import { Input, InputSenha } from "@/components/ui/input"; 
 // Importa os componentes <Input> e <InputSenha> para receber dados do usuário. 
 // <InputSenha> inclui funcionalidades extras, como alternar a visibilidade da senha.
@@ -29,6 +29,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Label } from "@/components/ui/label"; // Importa o componente <Label> utilizado para rotular os campos de formulário.
 import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious } from "@/components/ui/pagination"; // Importa os componentes de paginação que permitem a navegação entre páginas de resultados.
 import { Spinner } from "@/components/ui/spinner"; // Importa o componente <Spinner> que exibe um indicador visual de carregamento enquanto uma ação está em progresso.
+import { Creditos } from "@/components/Creditos";
 
 export default function Central() {
     // useState para armazenar os dados do usuário.
@@ -374,7 +375,7 @@ export default function Central() {
                             personagem.status == "Dead" ? `Mort${g}` :
                             // Retorna desconhecido caso seja Unkown
                             "Desconhecido",
-                        especie: personagem.species == "Unknown" ? "Desconhecido" : personagem.species,
+                        especie: personagem.species == "unknown" ? "Desconhecido" : personagem.species,
                         genero:
                             // Caso traduz os genero para Masculino ou Feminino.
                             personagem.gender == "Female" ? "Feminino" :
@@ -382,7 +383,7 @@ export default function Central() {
                             // Retorna desconhecido caso seja Unkown.
                             "Desconhecido",
                         // Retorna desconhecido caso origem ou localização seja Unkown, caso não seja retorna o valor original.
-                        localizacao: personagem.location.name == "Unknown" ? "Desconhecido" : personagem.location.name,
+                        localizacao: personagem.location.name == "unknown" ? "Desconhecido" : personagem.location.name,
                         imagem: personagem.image
                     }
                 });
@@ -729,10 +730,13 @@ export default function Central() {
                                         </Button>
                                     </div> : null // Caso contrario, nao renderiza nada.
                                 }
-                                <SheetFooter>
-                                    {/* asChild: Permite que o primeiro filho dentro dele assuma o comportamento do trigger. */}
-                                    <SheetClose asChild>
-                                    </SheetClose>
+                                {/* 
+                                    Configura o rodapé da side bar
+                                    absolute: Posiciona o elemento de forma absoluta em relação ao seu contêiner pai.
+                                    bottom-0: Configura o footer para o ponto mais baixo da sidebar.
+                                */}
+                                <SheetFooter className="absolute bottom-0">
+                                    <Creditos />
                                 </SheetFooter>
                             </SheetContent>
                         </Sheet>
@@ -1003,7 +1007,7 @@ export default function Central() {
                 lg:px-[25.4vw]: Em telas maiores que 1024px, ajusta o padding horizontal para 25.4vw.
                 mt-6: Adiciona margem superior de 6.
             */}
-            <PaginaRodape className="px-[13.3vw] xxs:px-[14.8vw] lg:px-[25.4vw] mt-6">
+            <PaginaRodape className="px-[13.3vw] xxs:px-[14.8vw] lg:px-[25.4vw] text-center mt-6">
                 {/* <Pagination>: Componente de paginação que agrupa os itens de navegação entre páginas. */}
                 <Pagination>
                     {/* <PaginationContent>: Container que engloba os itens individuais de paginação. */}

@@ -19,9 +19,17 @@ import { RotaProtegida } from "./components/RotaProtegida/rotaProtegida";
 
 // Importa a página de "Página Não Encontrada" para rotas inexistentes.
 import PaginaNaoEncontrada from "./pages/paginaNaoEncontrada";
+import { useEffect } from "react";
+import { VerificarToken } from "./components/VerificarToken/verificarToken";
 
 // Função principal que define a estrutura de rotas da aplicação.
 function App() {
+
+  // Chama a função para verificar se o token é valido quando a pagina é renderizada.
+  useEffect(() => {
+    VerificarToken();
+  }, []);
+
   return (
     // <Router>: habilita o roteamento baseado na URL.
     <Router>
